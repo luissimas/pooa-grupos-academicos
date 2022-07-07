@@ -1,0 +1,6 @@
+* Gerenciamento de grupos acadêmicos
+** Requisitos do sistema
+** Desenvolvimento
+*** Ambiente
+*** Arquitetura
+** Instalação local
