@@ -1,4 +1,5 @@
 import { Usuario } from '@entities/usuario'
+import { Curso } from '@entities/curso'
 
 export class Aluno extends Usuario {
   public readonly ra: number
