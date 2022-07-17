@@ -3,6 +3,7 @@ import { Aluno } from '@entities/aluno'
 import { Departamento } from '@entities/departamento'
 import { Usuario } from '@entities/usuario'
 import { Evento } from '@entities/evento'
+import { ProcessoSeletivo } from '@entities/processoSeletivo'
 
 export enum GrupoAcademicoStatusEnum {
   ATIVO,
