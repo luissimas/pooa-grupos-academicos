@@ -18,6 +18,9 @@ export class Evento {
   public readonly palestrantes: string[]
 
   constructor(props: Omit<Evento, 'id'>, id?: string) {
+    Evento.validaNome(props.nome)
+    Evento.validaOrganizadores(props.organizadores)
+
     this.id = id || uuid()
     this.nome = props.nome
     this.data = props.data
@@ -26,4 +29,17 @@ export class Evento {
     this.local = props.local
     this.palestrantes = props.palestrantes
   }
+
+  public static validaNome(nome: string) {
+    if (nome.length < 0) {
+        throw new InvalidFieldError(nome, 'nome', 'Nome do evento não pode ser vazio')
+    }
+  }
+
+  public static validaOrganizadores(organizadores: Aluno[]) {
+    if (organizadores.length < 1 || organizadores.length > 10) {
+        throw new InvalidFieldError(organizadores, 'organizadores', 'Quantidade de organizadores do evento deve estar entre 1 e 10')
+    }
+  }
+
 }
