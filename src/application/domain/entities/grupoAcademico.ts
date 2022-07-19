@@ -25,6 +25,12 @@ export class GrupoAcademico {
   public readonly processosRealizados: ProcessoSeletivo[]
 
   constructor(props: Omit<GrupoAcademico, 'id'>, id?: string) {
+    GrupoAcademico.validaNome(props.nome)
+    GrupoAcademico.validaDescricao(props.descricao)
+    GrupoAcademico.validaResponsavel(props.responsavel)
+    GrupoAcademico.validaMembros(props.membros)
+    GrupoAcademico.validaMaxMembros(props.maxMembros)
+
     this.id = id || uuid()
     this.nome = props.nome
     this.descricao = props.descricao
@@ -37,5 +43,35 @@ export class GrupoAcademico {
     this.eventosOrganizados = props.eventosOrganizados
     this.eventosConvidados = props.eventosConvidados
     this.processosRealizados = props.processosRealizados
+  }
+
+  public static validaNome(nome: string) {
+    if (nome.length < 2) {
+      throw new InvalidFieldError(nome, 'nome', 'Nome do grupo academico deve ter mais que 2 caracteres')
+    }
+  }
+
+  public static validaDescricao(descricao: string) {
+    if (descricao.length < 3) {
+      throw new InvalidFieldError(descricao, 'descricao', 'Descricao do grupo deve ter mais que 3 caracteres')
+    }
+  }
+
+  public static validaResponsavel(responsavel: Usuario) {
+    if (!responsavel) {
+      throw new InvalidFieldError(responsavel, 'responsavel', 'Grupo deve ter um responsavel')
+    }
+  }
+  
+  public static validaMembros(membros: Aluno[]) {
+    if (membros.length === 0) {
+      throw new InvalidFieldError(membros, 'membros', 'Grupo deve ter pelo menos um membro')
+    }
+  }
+
+  public static validaMaxMembros(maxMembros: number) {
+    if (maxMembros < 1) {
+      throw new InvalidFieldError(maxMembros, 'maxMembros', 'Máximo de membros do grupo não pode ser menor que 1')
+    }
   }
 }
