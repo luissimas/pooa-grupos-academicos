@@ -1,6 +1,27 @@
 * Gerenciamento de grupos acadêmicos
+Sistema de gerenciamento de grupos acadêmicos desenvolvido no decorrer da disciplina de Programação Orientada a Objetos Avançada.
+
 ** Requisitos do sistema
 ** Desenvolvimento
 *** Ambiente
 *** Arquitetura
 ** Instalação local
+Para instalar e rodar o servidor localmente, é necessário primeiro clonar este repositório.
+
+#+begin_src shell
+git clone git@github.com:luissimas/pooa-grupos-academicos.git && cd pooa-grupos-academicos
+#+end_src
+
+Após isso, é possível instalar as dependências usando o comando =yarn=. Caso você não tenha o =yarn= instalado, basta seguir as [[https://yarnpkg.com/getting-started/install][instruções de instalação]].
+
+#+begin_src shell
+yarn
+#+end_src
+
+Para iniciar o servidor basta utilizar o comando =yarn start=.
+
+#+begin_src shell
+yarn start
+#+end_src
+
+Agora, basta acessar a documentação da API através do seguinte link: [[http://localhost:3333/docs]].
