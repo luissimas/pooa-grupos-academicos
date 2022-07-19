@@ -22,13 +22,13 @@ export class ProcessoSeletivo {
 
   public static validaNoInscritos(noInscritos: number) {
     if (noInscritos < 0) {
-        throw new InvalidFieldError(noInscritos, 'noInscritos', 'Não pode haver negativos inscritos no PS')
+      throw new InvalidFieldError(noInscritos, 'noInscritos', 'Não pode haver negativos inscritos no PS')
     }
   }
 
   public static validaNoVagas(noVagas: number) {
     if (noVagas < 1) {
-        throw new InvalidFieldError(noVagas, 'noVagas', 'PS deve haver pelo menos uma vaga')
+      throw new InvalidFieldError(noVagas, 'noVagas', 'PS deve haver pelo menos uma vaga')
     }
   }
 }

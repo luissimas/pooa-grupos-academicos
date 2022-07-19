@@ -15,8 +15,7 @@ export class Curso {
 
   public static validaNome(nome: string) {
     if (nome.length < 3) {
-        throw new InvalidFieldError(nome, 'nome', 'Nome do curso deve conter mais que 3 caracteres')
+      throw new InvalidFieldError(nome, 'nome', 'Nome do curso deve conter mais que 3 caracteres')
     }
   }
-
 }

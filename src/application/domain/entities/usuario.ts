@@ -19,18 +19,17 @@ export abstract class Usuario {
 
   public static validaNome(nome: string) {
     if (nome.length < 3) {
-        throw new InvalidFieldError(nome, 'nome', 'Nome deve conter mais que 3 caracteres')
+      throw new InvalidFieldError(nome, 'nome', 'Nome deve conter mais que 3 caracteres')
     }
   }
   public static validaIdade(idade: number) {
     if (!idade || idade < 0 || idade > 130) {
-        throw new InvalidFieldError(idade, 'idade', 'Idade deve ser maior que 0 e menor que 130')
+      throw new InvalidFieldError(idade, 'idade', 'Idade deve ser maior que 0 e menor que 130')
     }
   }
   public static validaEmail(email: string) {
     if (email.length < 3 || !email.includes('@')) {
-        throw new InvalidFieldError(email, 'email', 'Endereco de email invalido')
+      throw new InvalidFieldError(email, 'email', 'Endereco de email invalido')
     }
   }
-
 }

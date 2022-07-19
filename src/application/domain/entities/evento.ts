@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid'
 import { Aluno } from '@entities/aluno'
 import { Local } from '@entities/local'
+import { InvalidFieldError } from '@errors'
 
 export enum EventoStatusEnum {
   A_ACONTECER,
@@ -32,14 +33,17 @@ export class Evento {
 
   public static validaNome(nome: string) {
     if (nome.length < 0) {
-        throw new InvalidFieldError(nome, 'nome', 'Nome do evento não pode ser vazio')
+      throw new InvalidFieldError(nome, 'nome', 'Nome do evento não pode ser vazio')
     }
   }
 
   public static validaOrganizadores(organizadores: Aluno[]) {
     if (organizadores.length < 1 || organizadores.length > 10) {
-        throw new InvalidFieldError(organizadores, 'organizadores', 'Quantidade de organizadores do evento deve estar entre 1 e 10')
+      throw new InvalidFieldError(
+        organizadores,
+        'organizadores',
+        'Quantidade de organizadores do evento deve estar entre 1 e 10'
+      )
     }
   }
-
 }
