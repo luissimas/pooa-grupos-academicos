@@ -20,14 +20,13 @@ export class Aluno extends Usuario {
 
   public static validaRA(ra: number) {
     if (ra < 0 || ra > 1000000) {
-        throw new InvalidFieldError(ra, 'ra', 'RA deve ser um numero entre 0 e 1000000')
+      throw new InvalidFieldError(ra, 'ra', 'RA deve ser um numero entre 0 e 1000000')
     }
   }
 
   public static validaIRA(ira: number) {
     if (ira < 0 || ira > 20000) {
-        throw new InvalidFieldError(ira, 'ira', 'IRA deve ser um numero entre 0 e 20000')
+      throw new InvalidFieldError(ira, 'ira', 'IRA deve ser um numero entre 0 e 20000')
     }
   }
-
 }

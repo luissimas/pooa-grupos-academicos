@@ -15,14 +15,13 @@ export class Professor extends Usuario {
 
   public static validaLinhaPesquisa(linhaPesquisa: string) {
     if (linhaPesquisa.length === 0) {
-        throw new InvalidFieldError(linhaPesquisa, 'linhaPesquisa', 'Professor deve possuir linha de pesquisa')
+      throw new InvalidFieldError(linhaPesquisa, 'linhaPesquisa', 'Professor deve possuir linha de pesquisa')
     }
   }
 
   public static validaOrgaoColegiado(orgaoColegiado: string) {
     if (orgaoColegiado.length === 0) {
-        throw new InvalidFieldError(orgaoColegiado, 'orgaoColegiado', 'Professor deve ter orgao colegiado')
+      throw new InvalidFieldError(orgaoColegiado, 'orgaoColegiado', 'Professor deve ter orgao colegiado')
     }
   }
-
 }

@@ -4,6 +4,7 @@ import { Departamento } from '@entities/departamento'
 import { Usuario } from '@entities/usuario'
 import { Evento } from '@entities/evento'
 import { ProcessoSeletivo } from '@entities/processoSeletivo'
+import { InvalidFieldError } from '@errors'
 
 export enum GrupoAcademicoStatusEnum {
   ATIVO,
@@ -47,31 +48,31 @@ export class GrupoAcademico {
 
   public static validaNome(nome: string) {
     if (nome.length < 2) {
-      throw new InvalidFieldError(nome, 'nome', 'Nome do grupo academico deve ter mais que 2 caracteres')
+      throw new InvalidFieldError('nome', 'Nome do grupo academico deve ter mais que 2 caracteres')
     }
   }
 
   public static validaDescricao(descricao: string) {
     if (descricao.length < 3) {
-      throw new InvalidFieldError(descricao, 'descricao', 'Descricao do grupo deve ter mais que 3 caracteres')
+      throw new InvalidFieldError('descricao', 'Descricao do grupo deve ter mais que 3 caracteres')
     }
   }
 
   public static validaResponsavel(responsavel: Usuario) {
     if (!responsavel) {
-      throw new InvalidFieldError(responsavel, 'responsavel', 'Grupo deve ter um responsavel')
+      throw new InvalidFieldError('responsavel', 'Grupo deve ter um responsavel')
     }
   }
-  
+
   public static validaMembros(membros: Aluno[]) {
     if (membros.length === 0) {
-      throw new InvalidFieldError(membros, 'membros', 'Grupo deve ter pelo menos um membro')
+      throw new InvalidFieldError('membros', 'Grupo deve ter pelo menos um membro')
     }
   }
 
   public static validaMaxMembros(maxMembros: number) {
     if (maxMembros < 1) {
-      throw new InvalidFieldError(maxMembros, 'maxMembros', 'Máximo de membros do grupo não pode ser menor que 1')
+      throw new InvalidFieldError('maxMembros', 'Máximo de membros do grupo não pode ser menor que 1')
     }
   }
 }
