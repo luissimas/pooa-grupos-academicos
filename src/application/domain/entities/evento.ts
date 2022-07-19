@@ -33,14 +33,13 @@ export class Evento {
 
   public static validaNome(nome: string) {
     if (nome.length < 0) {
-      throw new InvalidFieldError(nome, 'nome', 'Nome do evento não pode ser vazio')
+      throw new InvalidFieldError('nome', 'Nome do evento não pode ser vazio')
     }
   }
 
   public static validaOrganizadores(organizadores: Aluno[]) {
     if (organizadores.length < 1 || organizadores.length > 10) {
       throw new InvalidFieldError(
-        organizadores,
         'organizadores',
         'Quantidade de organizadores do evento deve estar entre 1 e 10'
       )

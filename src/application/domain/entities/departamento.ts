@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid'
+import { InvalidFieldError } from '@errors'
 
 export class Departamento {
   public readonly id: string
@@ -15,7 +16,7 @@ export class Departamento {
 
   public static validaNome(nome: string) {
     if (nome.length < 5) {
-      throw new InvalidFieldError(nome, 'nome', 'Nome do depto deve conter mais que 5 caracteres')
+      throw new InvalidFieldError('nome', 'Nome do depto deve conter mais que 5 caracteres')
     }
   }
 }
