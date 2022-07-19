@@ -8,12 +8,12 @@ export class UserAlreadyExists extends BaseError {
 
 export class EntityNotFound extends BaseError {
   constructor(public readonly entity: string, public readonly details?: string) {
-    super(`${entity} not found.`, details)
+    super(`${entity} nao encontrada.`, details)
   }
 }
 
 export class InvalidFieldError extends BaseError {
   constructor(field: string, public readonly details?: string) {
-    super(`Field "${field}" is invalid.`, details)
+    super(`Campo "${field}" invalido.`, details)
   }
 }
