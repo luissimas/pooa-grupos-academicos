@@ -1,4 +1,5 @@
 import express from 'express'
+import { router } from '@routes'
 
 // Loading dotenv config
 import 'dotenv/config'
@@ -6,7 +7,6 @@ import 'dotenv/config'
 const app = express()
 
 app.use(express.json())
-
-app.get('/', (req, res) => res.send('OK'))
+app.use(router)
 
 export { app }
