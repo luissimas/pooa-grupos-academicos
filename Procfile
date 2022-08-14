@@ -1,1 +1,1 @@
-web: yarn compile && yarn start
+web: yarn start
