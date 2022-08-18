@@ -5,6 +5,10 @@ Sistema de gerenciamento de grupos acadêmicos desenvolvido no decorrer da disci
 ** Desenvolvimento
 *** Ambiente
 *** Arquitetura
+
+** Uso
+A rota base para acessar os recursos da API é [[https://pooa-grupos-academicos.herokuapp.com/]]. A documentação completa está disponível em: [[https://pooa-grupos-academicos.herokuapp.com/docs]].
+
 ** Instalação local
 Para instalar e rodar o servidor localmente, é necessário primeiro clonar este repositório.
 
