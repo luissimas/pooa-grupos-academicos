@@ -14,8 +14,8 @@
       "@routes": ["./http/routes"],
       "@factories/*": ["./factories/*"],
       "@utils/*": ["./utils/*"],
-      "@errors/*": ["./domain/errors/*"],
-      "@errors": ["./domain/errors"]
+      "@errors/*": ["./application/domain/errors/*"],
+      "@errors": ["./application/domain/errors"]
     },
     "sourceMap": true,
     "outDir": "dist",
