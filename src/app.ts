@@ -1,5 +1,5 @@
 import express from 'express'
-import { router } from '@routes'
+import { router } from '@http/routes'
 
 // Loading dotenv config
 import 'dotenv/config'
