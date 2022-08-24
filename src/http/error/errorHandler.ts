@@ -1,5 +1,5 @@
 import { BaseError } from '@errors/baseError'
-import { HttpResponse, IHttpErrorHandler } from '..'
+import { HttpResponse, IHttpErrorHandler } from '@http'
 
 type StatusAssoc = {
   [key: string]: number

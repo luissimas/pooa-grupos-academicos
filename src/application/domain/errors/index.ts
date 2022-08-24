@@ -17,3 +17,9 @@ export class InvalidFieldError extends BaseError {
     super(`Campo "${field}" invalido.`, details)
   }
 }
+
+export class UnauthorizedError extends BaseError {
+  constructor(message: string) {
+    super(message)
+  }
+}
