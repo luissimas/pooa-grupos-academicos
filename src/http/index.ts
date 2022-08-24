@@ -1,4 +1,5 @@
 import { Usuario } from '@entities/usuario'
+import { BaseError } from '@errors/baseError'
 
 export type HttpRequest = {
   body?: any
@@ -22,4 +23,8 @@ export interface IHttpController {
 
 export interface IHttpMiddleware {
   handle: (httpRequest: HttpRequest) => Promise<HttpRequest['context']>
+}
+
+export interface IHttpErrorHandler {
+  handle: (error: BaseError) => HttpResponse<any>
 }
