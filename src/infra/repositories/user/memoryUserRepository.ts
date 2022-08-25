@@ -4,6 +4,9 @@ import { IUserRepository } from '@repositories/userRepository'
 export class MemoryUserRepository implements IUserRepository {
   private static users: Usuario[] = []
 
+  async create(user: Usuario): Promise<void> {
+    MemoryUserRepository.users = [...MemoryUserRepository.users, user]
+  }
   async list(): Promise<Usuario[]> {
     return MemoryUserRepository.users
   }
