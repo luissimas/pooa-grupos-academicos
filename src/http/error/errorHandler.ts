@@ -21,6 +21,9 @@ export class HttpErrorHandler implements IHttpErrorHandler {
     const status = httpStatus[name] || 500
 
     if (status === 500) {
+      // NOTE: Logging error for debugging
+      console.log(error)
+
       return {
         status,
         data: {
