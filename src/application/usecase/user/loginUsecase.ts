@@ -3,19 +3,18 @@ import { EntityNotFound } from '@errors'
 import { IUserRepository } from '@repositories/userRepository'
 import { IAuthService } from 'application/services/auth'
 import { IPasswordService } from 'application/services/password'
+import { IUsecase } from 'application/usecase'
 
-type LoginUsecaseParams = {
+export type LoginUsecaseParams = {
   email: string
   password: string
 }
 
-type LoginUsecaseResult = {
+export type LoginUsecaseResult = {
   token: string
 }
 
-export interface ILoginUsecase {
-  execute: (params: LoginUsecaseParams) => Promise<LoginUsecaseResult>
-}
+export interface ILoginUsecase extends IUsecase<LoginUsecaseParams, LoginUsecaseResult> {}
 
 export class LoginUsecase implements ILoginUsecase {
   constructor(

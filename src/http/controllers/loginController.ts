@@ -1,11 +1,11 @@
 import { InvalidFieldError } from '@errors'
 import { HttpRequest, HttpResponse, IHttpController } from '@http'
-import { ILoginUsecase } from 'application/usecase/user/loginUsecase'
+import { ILoginUsecase, LoginUsecaseResult } from 'application/usecase/user/loginUsecase'
 
 export class LoginController implements IHttpController {
   constructor(private readonly loginUsecase: ILoginUsecase) {}
 
-  async handle(request: HttpRequest): Promise<HttpResponse<any>> {
+  async handle(request: HttpRequest): Promise<HttpResponse<LoginUsecaseResult>> {
     const email = request.body?.email
     const password = request.body?.password
 
