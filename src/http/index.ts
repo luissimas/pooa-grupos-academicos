@@ -18,11 +18,11 @@ export type HttpResponse<T> = {
 }
 
 export interface IHttpController {
-  handle: (httpRequest: HttpRequest) => Promise<HttpResponse<any>>
+  handle: (request: HttpRequest) => Promise<HttpResponse<any>>
 }
 
 export interface IHttpMiddleware {
-  handle: (httpRequest: HttpRequest) => Promise<HttpRequest['context']>
+  handle: (request: HttpRequest) => Promise<HttpRequest['context']>
 }
 
 export interface IHttpErrorHandler {

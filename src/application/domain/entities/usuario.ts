@@ -1,12 +1,18 @@
 import { v4 as uuid } from 'uuid'
 import { InvalidFieldError } from '@errors'
 
+export enum UsuarioTipoEnum {
+  Aluno = 'aluno',
+  Professor = 'professor',
+}
+
 export abstract class Usuario {
   public readonly id: string
   public readonly nome: string
   public readonly idade: number
   public readonly email: string
   public readonly senha: string
+  public readonly tipo: UsuarioTipoEnum
 
   constructor(props: Omit<Usuario, 'id'>, id?: string) {
     Usuario.validaNome(props.nome)
@@ -19,6 +25,7 @@ export abstract class Usuario {
     this.idade = props.idade
     this.email = props.email
     this.senha = props.senha
+    this.tipo = props.tipo
   }
 
   public static validaNome(nome: string) {
