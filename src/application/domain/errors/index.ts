@@ -8,7 +8,7 @@ export class UserAlreadyExists extends BaseError {
 
 export class EntityNotFound extends BaseError {
   constructor(public readonly entity: string, public readonly details?: string) {
-    super(`${entity} nao encontrada.`, details)
+    super(`Entidade ${entity} nao encontrada.`, details)
   }
 }
 

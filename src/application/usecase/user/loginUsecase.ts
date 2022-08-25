@@ -17,7 +17,7 @@ export interface ILoginUsecase {
   execute: (params: LoginUsecaseParams) => Promise<LoginUsecaseResult>
 }
 
-export class LoginUsecase {
+export class LoginUsecase implements ILoginUsecase {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly passwordService: IPasswordService,
@@ -26,7 +26,7 @@ export class LoginUsecase {
 
   async execute(params: LoginUsecaseParams): Promise<LoginUsecaseResult> {
     const user = await this.userRepository.getByEmail(params.email)
-    if (!user) throw new EntityNotFound('Usuário')
+    if (!user) throw new EntityNotFound('usuário')
 
     const passwordMatch = await this.passwordService.checkPassword(params.password, user.senha)
     if (!passwordMatch) throw new UnauthorizedError('Credenciais inválidas')
