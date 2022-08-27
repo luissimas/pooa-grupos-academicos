@@ -1,4 +1,4 @@
-import { CursoDTO } from '@dtos/curso'
+import { CourseDTO } from '@dtos/course'
 import { UserRoleEnum } from '@entities/user'
 
 export interface UserDTO {
@@ -13,7 +13,7 @@ export interface StudentDTO extends UserDTO {
   ra: number
   ira: number
   semester: number
-  course: CursoDTO
+  course: CourseDTO
 }
 
 export interface ProfessorDTO extends UserDTO {
