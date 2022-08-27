@@ -1,21 +1,19 @@
-import { v4 as uuid } from 'uuid'
-
-export class Local {
+export class Location {
   public readonly id: string
-  public readonly rua: string
-  public readonly numero: string
-  public readonly bairro: string
-  public readonly cep: number
-  public readonly complemento: string
-  public readonly pontoDeReferencia: string
+  public readonly street: string
+  public readonly number: string
+  public readonly district: string
+  public readonly zipCode: number
+  public readonly complement: string
+  public readonly referencePoint: string
 
-  constructor(props: Omit<Local, 'id'>, id?: string) {
-    this.id = id || uuid()
-    this.rua = props.rua
-    this.numero = props.numero
-    this.bairro = props.bairro
-    this.cep = props.cep
-    this.complemento = props.complemento
-    this.pontoDeReferencia = props.pontoDeReferencia
+  constructor(props: Location) {
+    this.id = props.id
+    this.street = props.street
+    this.number = props.number
+    this.district = props.district
+    this.zipCode = props.zipCode
+    this.complement = props.complement
+    this.referencePoint = props.referencePoint
   }
 }
