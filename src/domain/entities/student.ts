@@ -1,12 +1,12 @@
 import { User } from '@entities/user'
-import { Curso } from '@entities/course'
+import { Course } from '@entities/course'
 import { InvalidFieldError } from '@errors'
 
 export class Student extends User {
   public readonly ra: number
   public readonly ira: number
   public readonly semester: number
-  public readonly course: Curso
+  public readonly course: Course
 
   constructor(props: Student) {
     Student.validateRa(props.ra)
