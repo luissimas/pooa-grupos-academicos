@@ -1,7 +1,7 @@
 import { Student } from '@entities/student'
 import { Departamento } from '@entities/department'
 import { User } from '@entities/user'
-import { Evento } from '@entities/event'
+import { Event } from '@entities/event'
 import { RecruitmentProcess } from '@entities/recruitmentProcess'
 import { InvalidFieldError } from '@errors'
 
@@ -20,8 +20,8 @@ export class AcademicGroup {
   public readonly sponsor: User
   public readonly members: Student[]
   public readonly maxMembers: number
-  public readonly promotedEvents: Evento[]
-  public readonly invitedEvents: Evento[]
+  public readonly promotedEvents: Event[]
+  public readonly invitedEvents: Event[]
   public readonly recruitmentProcesses: RecruitmentProcess[]
 
   constructor(props: AcademicGroup) {

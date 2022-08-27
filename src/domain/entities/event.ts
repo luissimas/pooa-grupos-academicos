@@ -1,48 +1,44 @@
-import { v4 as uuid } from 'uuid'
-import { Aluno } from '@entities/aluno'
-import { Local } from '@entities/local'
+import { Student } from '@entities/student'
+import { Location } from '@entities/location'
 import { InvalidFieldError } from '@errors'
 
-export enum EventoStatusEnum {
-  A_ACONTECER,
-  ACONTECENDO,
-  CANCELADO,
+export enum EventStatusEnum {
+  Future = 'future',
+  Occuring = 'occuring',
+  Canceled = 'canceled',
 }
 
-export class Evento {
+export class Event {
   public readonly id: string
-  public readonly nome: string
-  public readonly data: Date
-  public readonly organizadores: Aluno[]
-  public readonly status: EventoStatusEnum
-  public readonly local: Local
-  public readonly palestrantes: string[]
+  public readonly name: string
+  public readonly date: Date
+  public readonly promoters: Student[]
+  public readonly status: EventStatusEnum
+  public readonly location: Location
+  public readonly speakers: string[]
 
-  constructor(props: Omit<Evento, 'id'>, id?: string) {
-    Evento.validaNome(props.nome)
-    Evento.validaOrganizadores(props.organizadores)
+  constructor(props: Event) {
+    Event.validateName(props.name)
+    Event.validatePromoters(props.promoters)
 
-    this.id = id || uuid()
-    this.nome = props.nome
-    this.data = props.data
-    this.organizadores = props.organizadores
+    this.id = props.id
+    this.name = props.name
+    this.date = props.date
+    this.promoters = props.promoters
     this.status = props.status
-    this.local = props.local
-    this.palestrantes = props.palestrantes
+    this.location = props.location
+    this.speakers = props.speakers
   }
 
-  public static validaNome(nome: string) {
-    if (nome.length < 0) {
+  public static validateName(name: string) {
+    if (name.length < 0) {
       throw new InvalidFieldError('nome', 'Nome do evento não pode ser vazio')
     }
   }
 
-  public static validaOrganizadores(organizadores: Aluno[]) {
-    if (organizadores.length < 1 || organizadores.length > 10) {
-      throw new InvalidFieldError(
-        'organizadores',
-        'Quantidade de organizadores do evento deve estar entre 1 e 10'
-      )
+  public static validatePromoters(promoters: Student[]) {
+    if (promoters.length < 1 || promoters.length > 10) {
+      throw new InvalidFieldError('organizadores', 'Quantidade de organizadores do evento deve estar entre 1 e 10')
     }
   }
 }
