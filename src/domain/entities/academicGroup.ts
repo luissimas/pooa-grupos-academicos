@@ -1,77 +1,76 @@
-import { v4 as uuid } from 'uuid'
-import { Aluno } from '@entities/aluno'
-import { Departamento } from '@entities/departamento'
-import { Usuario } from '@entities/usuario'
-import { Evento } from '@entities/evento'
-import { ProcessoSeletivo } from '@entities/processoSeletivo'
+import { Student } from '@entities/student'
+import { Departamento } from '@entities/department'
+import { User } from '@entities/user'
+import { Evento } from '@entities/event'
+import { ProcessoSeletivo } from '@entities/recruitmentProcess'
 import { InvalidFieldError } from '@errors'
 
-export enum GrupoAcademicoStatusEnum {
-  ATIVO,
-  DESATIVADO,
+export enum AcademicGroupStatusEnum {
+  Active = 'active',
+  Inactive = 'inactive',
 }
 
-export class GrupoAcademico {
+export class AcademicGroup {
   public readonly id: string
-  public readonly nome: string
-  public readonly descricao: string
-  public readonly dataFundacao: Date
-  public readonly status: GrupoAcademicoStatusEnum
-  public readonly departamento: Departamento
-  public readonly responsavel: Usuario
-  public readonly membros: Aluno[]
-  public readonly maxMembros: number
-  public readonly eventosOrganizados: Evento[]
-  public readonly eventosConvidados: Evento[]
-  public readonly processosRealizados: ProcessoSeletivo[]
+  public readonly name: string
+  public readonly description: string
+  public readonly foundationDate: Date
+  public readonly status: AcademicGroupStatusEnum
+  public readonly department: Departamento
+  public readonly sponsor: User
+  public readonly members: Student[]
+  public readonly maxMembers: number
+  public readonly promotedEvents: Evento[]
+  public readonly invitedEvents: Evento[]
+  public readonly recruitmentProcesses: ProcessoSeletivo[]
 
-  constructor(props: Omit<GrupoAcademico, 'id'>, id?: string) {
-    GrupoAcademico.validaNome(props.nome)
-    GrupoAcademico.validaDescricao(props.descricao)
-    GrupoAcademico.validaResponsavel(props.responsavel)
-    GrupoAcademico.validaMembros(props.membros)
-    GrupoAcademico.validaMaxMembros(props.maxMembros)
+  constructor(props: AcademicGroup) {
+    AcademicGroup.validateName(props.name)
+    AcademicGroup.validateDescription(props.description)
+    AcademicGroup.validateSponsor(props.sponsor)
+    AcademicGroup.validateMembers(props.members)
+    AcademicGroup.validateMaxMembers(props.maxMembers)
 
-    this.id = id || uuid()
-    this.nome = props.nome
-    this.descricao = props.descricao
-    this.dataFundacao = props.dataFundacao
+    this.id = props.id
+    this.name = props.name
+    this.description = props.description
+    this.foundationDate = props.foundationDate
     this.status = props.status
-    this.departamento = props.departamento
-    this.responsavel = props.responsavel
-    this.membros = props.membros
-    this.maxMembros = props.maxMembros
-    this.eventosOrganizados = props.eventosOrganizados
-    this.eventosConvidados = props.eventosConvidados
-    this.processosRealizados = props.processosRealizados
+    this.department = props.department
+    this.sponsor = props.sponsor
+    this.members = props.members
+    this.maxMembers = props.maxMembers
+    this.promotedEvents = props.promotedEvents
+    this.invitedEvents = props.invitedEvents
+    this.recruitmentProcesses = props.recruitmentProcesses
   }
 
-  public static validaNome(nome: string) {
-    if (nome.length < 2) {
+  public static validateName(name: string) {
+    if (name.length < 2) {
       throw new InvalidFieldError('nome', 'Nome do grupo academico deve ter mais que 2 caracteres')
     }
   }
 
-  public static validaDescricao(descricao: string) {
-    if (descricao.length < 3) {
+  public static validateDescription(description: string) {
+    if (description.length < 3) {
       throw new InvalidFieldError('descricao', 'Descricao do grupo deve ter mais que 3 caracteres')
     }
   }
 
-  public static validaResponsavel(responsavel: Usuario) {
-    if (!responsavel) {
+  public static validateSponsor(sponsor: User) {
+    if (!sponsor) {
       throw new InvalidFieldError('responsavel', 'Grupo deve ter um responsavel')
     }
   }
 
-  public static validaMembros(membros: Aluno[]) {
-    if (membros.length === 0) {
+  public static validateMembers(members: Student[]) {
+    if (members.length === 0) {
       throw new InvalidFieldError('membros', 'Grupo deve ter pelo menos um membro')
     }
   }
 
-  public static validaMaxMembros(maxMembros: number) {
-    if (maxMembros < 1) {
+  public static validateMaxMembers(maxMembers: number) {
+    if (maxMembers < 1) {
       throw new InvalidFieldError('maxMembros', 'Máximo de membros do grupo não pode ser menor que 1')
     }
   }
