@@ -1,33 +1,11 @@
+import { AlunoDTO, ProfessorDTO } from '@application/dtos/user'
 import { Aluno } from '@entities/aluno'
-import { Curso } from '@entities/curso'
 import { Professor } from '@entities/professor'
 import { UsuarioTipoEnum } from '@entities/usuario'
 import { IUserRepository } from '@repositories/userRepository'
 import { IIdService } from '@services/id'
 import { IPasswordService } from '@services/password'
-import { IUsecase } from '..'
-
-export type AlunoDTO = {
-  nome: string
-  idade: number
-  email: string
-  senha: string
-  tipo: UsuarioTipoEnum
-  ra: number
-  ira: number
-  semestre: number
-  curso: Curso
-}
-
-export type ProfessorDTO = {
-  nome: string
-  idade: number
-  email: string
-  senha: string
-  tipo: UsuarioTipoEnum
-  linhaPesquisa: string
-  orgaoColegiado: string
-}
+import { IUsecase } from '@usecases'
 
 export type CreateUserUsecaseParams = AlunoDTO | ProfessorDTO
 
