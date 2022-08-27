@@ -1,6 +1,6 @@
+import { adaptController } from '@adapters/expressControllerAdapter'
+import { LoginControllerFactory } from '@factories/controller/auth/loginControllerFactory'
 import { CreateUserControllerFactory } from '@factories/controller/user/createUserControllerFactory'
-import { LoginControllerFactory } from '@factories/controller/user/loginControllerFactory'
-import { adaptController } from '@http/adapters/expressControllerAdapter'
 import { Router } from 'express'
 
 const loginController = new LoginControllerFactory().createController()

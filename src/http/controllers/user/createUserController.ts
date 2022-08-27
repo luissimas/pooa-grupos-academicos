@@ -1,6 +1,6 @@
 import { InvalidFieldError } from '@errors'
 import { HttpRequest, HttpResponse, IHttpController } from '@http'
-import { CreateUserUsecaseResult, ICreateUserUsecase } from 'application/usecase/user/createUserUsecase'
+import { CreateUserUsecaseResult, ICreateUserUsecase } from '@usecases/user/createUserUsecase'
 import Joi from 'joi'
 
 export class CreateUserController implements IHttpController {

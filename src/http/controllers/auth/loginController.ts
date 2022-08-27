@@ -1,6 +1,6 @@
 import { InvalidFieldError } from '@errors'
 import { HttpRequest, HttpResponse, IHttpController } from '@http'
-import { ILoginUsecase, LoginUsecaseResult } from 'application/usecase/user/loginUsecase'
+import { ILoginUsecase, LoginUsecaseResult } from '@usecases/auth/loginUsecase'
 
 export class LoginController implements IHttpController {
   constructor(private readonly loginUsecase: ILoginUsecase) {}

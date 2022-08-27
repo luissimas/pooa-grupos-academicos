@@ -3,8 +3,8 @@ import { Curso } from '@entities/curso'
 import { Professor } from '@entities/professor'
 import { UsuarioTipoEnum } from '@entities/usuario'
 import { IUserRepository } from '@repositories/userRepository'
-import { IIdService } from 'application/services/id'
-import { IPasswordService } from 'application/services/password'
+import { IIdService } from '@services/id'
+import { IPasswordService } from '@services/password'
 import { IUsecase } from '..'
 
 export type AlunoDTO = {

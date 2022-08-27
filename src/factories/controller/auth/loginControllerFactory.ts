@@ -1,5 +1,5 @@
-import { LoginController } from '@controllers/loginController'
-import { LoginUsecaseFactory } from '@factories/usecase/user/loginUsecaseFactory'
+import { LoginController } from '@controllers/auth/loginController'
+import { LoginUsecaseFactory } from '@factories/usecase/auth/loginUsecaseFactory'
 import { IHttpController } from '@http'
 
 export class LoginControllerFactory {

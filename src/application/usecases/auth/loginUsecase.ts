@@ -1,9 +1,8 @@
-import { UnauthorizedError } from '@errors'
-import { EntityNotFound } from '@errors'
+import { EntityNotFound, UnauthorizedError } from '@errors'
 import { IUserRepository } from '@repositories/userRepository'
-import { IAuthService } from 'application/services/auth'
-import { IPasswordService } from 'application/services/password'
-import { IUsecase } from 'application/usecase'
+import { IAuthService } from '@services/auth'
+import { IPasswordService } from '@services/password'
+import { IUsecase } from '@usecases'
 
 export type LoginUsecaseParams = {
   email: string

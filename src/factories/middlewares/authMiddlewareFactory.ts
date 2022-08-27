@@ -1,7 +1,7 @@
 import { IHttpMiddleware } from '@http'
+import { JwtAuthService } from '@infra/auth/jwtAuthService'
+import { MemoryUserRepository } from '@infra/repositories/user/memoryUserRepository'
 import { AuthMiddleware } from '@middlewares/auth'
-import { JwtAuthService } from 'infra/auth/jwtAuthService'
-import { MemoryUserRepository } from 'infra/repositories/user/memoryUserRepository'
 
 export class AuthMiddlewareFactory {
   createMiddleware(): IHttpMiddleware {
