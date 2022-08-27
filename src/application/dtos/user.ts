@@ -1,22 +1,22 @@
 import { CursoDTO } from '@dtos/curso'
-import { UsuarioTipoEnum } from '@entities/usuario'
+import { UserRoleEnum } from '@entities/user'
 
-export interface UsuarioDTO {
-  nome: string
-  idade: number
+export interface UserDTO {
+  name: string
+  age: number
   email: string
-  senha: string
-  tipo: UsuarioTipoEnum
+  password: string
+  role: UserRoleEnum
 }
 
-export interface AlunoDTO extends UsuarioDTO {
+export interface StudentDTO extends UserDTO {
   ra: number
   ira: number
-  semestre: number
-  curso: CursoDTO
+  semester: number
+  course: CursoDTO
 }
 
-export interface ProfessorDTO extends UsuarioDTO {
-  linhaPesquisa: string
-  orgaoColegiado: string
+export interface ProfessorDTO extends UserDTO {
+  researchField: string
+  collegiateBody: string
 }
