@@ -1,5 +1,5 @@
 import { Student } from '@entities/student'
-import { Departamento } from '@entities/department'
+import { Department } from '@entities/department'
 import { User } from '@entities/user'
 import { Event } from '@entities/event'
 import { RecruitmentProcess } from '@entities/recruitmentProcess'
@@ -16,7 +16,7 @@ export class AcademicGroup {
   public readonly description: string
   public readonly foundationDate: Date
   public readonly status: AcademicGroupStatusEnum
-  public readonly department: Departamento
+  public readonly department: Department
   public readonly sponsor: User
   public readonly members: Student[]
   public readonly maxMembers: number
