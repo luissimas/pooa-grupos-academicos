@@ -2,6 +2,7 @@ import { CourseDTO } from '@dtos/course'
 import { UserRoleEnum } from '@entities/user'
 
 export interface UserDTO {
+  id: string
   name: string
   age: number
   email: string
