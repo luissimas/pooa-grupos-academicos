@@ -2,7 +2,7 @@ import { Student } from '@entities/student'
 import { Departamento } from '@entities/department'
 import { User } from '@entities/user'
 import { Evento } from '@entities/event'
-import { ProcessoSeletivo } from '@entities/recruitmentProcess'
+import { RecruitmentProcess } from '@entities/recruitmentProcess'
 import { InvalidFieldError } from '@errors'
 
 export enum AcademicGroupStatusEnum {
@@ -22,7 +22,7 @@ export class AcademicGroup {
   public readonly maxMembers: number
   public readonly promotedEvents: Evento[]
   public readonly invitedEvents: Evento[]
-  public readonly recruitmentProcesses: ProcessoSeletivo[]
+  public readonly recruitmentProcesses: RecruitmentProcess[]
 
   constructor(props: AcademicGroup) {
     AcademicGroup.validateName(props.name)

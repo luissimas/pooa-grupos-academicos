@@ -1,34 +1,47 @@
-import { v4 as uuid } from 'uuid'
 import { InvalidFieldError } from '@errors'
 
-export class ProcessoSeletivo {
+export class RecruitmentProcess {
   public readonly id: string
-  public readonly data: Date
-  public readonly noInscritos: number
-  public readonly noVagas: number
-  public readonly noIngressantes: number
-  public readonly etapas: number
+  public readonly date: Date
+  public readonly enrolled: number
+  public readonly openings: number
+  public readonly entrants: number
+  public readonly stages: number
 
-  constructor(props: Omit<ProcessoSeletivo, 'id'>, id?: string) {
-    ProcessoSeletivo.validaNoInscritos(props.noInscritos)
-    ProcessoSeletivo.validaNoVagas(props.noVagas)
+  constructor(props: RecruitmentProcess) {
+    RecruitmentProcess.valdiateEnrolled(props.enrolled)
+    RecruitmentProcess.validateOpenings(props.openings)
+    RecruitmentProcess.validateEntrants(props.entrants)
+    RecruitmentProcess.validateStages(props.stages)
 
-    this.id = id || uuid()
-    this.data = props.data
-    this.noInscritos = props.noInscritos
-    this.noVagas = props.noVagas
-    this.noIngressantes = props.noIngressantes
-    this.etapas = props.etapas
+    this.id = props.id
+    this.date = props.date
+    this.enrolled = props.enrolled
+    this.openings = props.openings
+    this.entrants = props.entrants
+    this.stages = props.stages
   }
 
-  public static validaNoInscritos(noInscritos: number) {
-    if (noInscritos < 0) {
+  public static valdiateEnrolled(enrolled: number) {
+    if (enrolled < 0) {
       throw new InvalidFieldError('noInscritos', 'Não pode haver negativos inscritos no PS')
     }
   }
 
-  public static validaNoVagas(noVagas: number) {
-    if (noVagas < 1) {
+  public static validateOpenings(openings: number) {
+    if (openings < 1) {
+      throw new InvalidFieldError('noVagas', 'PS deve haver pelo menos uma vaga')
+    }
+  }
+
+  public static validateEntrants(entrants: number) {
+    if (entrants < 1) {
+      throw new InvalidFieldError('noVagas', 'PS deve haver pelo menos uma vaga')
+    }
+  }
+
+  public static validateStages(stages: number) {
+    if (stages < 1) {
       throw new InvalidFieldError('noVagas', 'PS deve haver pelo menos uma vaga')
     }
   }
