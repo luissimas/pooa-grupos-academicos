@@ -4,7 +4,6 @@ import { AcademicGroupDTO } from "@dtos/academicGroup"
 import { IUsecase } from "@usecases"
 import { IIdService } from "@services/id"
 import { AcademicGroup } from "@entities/academicGroup"
-import { userInfo } from "os"
 import { UserRoleEnum } from "@entities/user"
 import { UnauthorizedError } from "@domain/errors"
 
