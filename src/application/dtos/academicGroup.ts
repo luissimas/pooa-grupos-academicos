@@ -11,10 +11,10 @@ export interface AcademicGroupDTO {
   foundationDate: Date
   status: AcademicGroupStatusEnum
   department: DepartmentDTO
-  responsible: UserDTO
+  sponsor: UserDTO
   members: StudentDTO
   maxMembers: number
-  organizedEvents: number
+  promotedEvents: number
   invitedEvents: number
-  selectiveProcesses: RecruitmentProcessDTO
+  recruitmentProcesses: RecruitmentProcessDTO
 }

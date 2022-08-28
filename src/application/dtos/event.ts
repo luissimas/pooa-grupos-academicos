@@ -6,8 +6,8 @@ export interface EventDTO {
   id: string
   name: string
   date: Date
-  organizers: StudentDTO[]
+  promoters: StudentDTO[]
   status: EventStatusEnum
-  address: AddressDTO
+  location: AddressDTO
   speakers: string[]
 }

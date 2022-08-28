@@ -1,8 +1,8 @@
 export interface RecruitmentProcessDTO {
   id: string
-  data: Date
-  numParticipants: number
-  numPlaces: number
-  numAccepted: number
+  date: Date
+  enrolled: number
+  openings: number
+  entrants: number
   stages: number
 }
