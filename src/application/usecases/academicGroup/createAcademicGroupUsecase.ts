@@ -39,7 +39,7 @@ export class CreateAcademicGroupUsecase implements ICreateAcademicGroupUsecase {
     const id = this.idService.generate()
 
     const academicGroup = new AcademicGroup(
-      { ...params.academicGroup, id } as unknown as AcademicGroup
+      { ...params.academicGroup, id } as AcademicGroup
     )
 
     this.academicGroupRepository.create(academicGroup)
