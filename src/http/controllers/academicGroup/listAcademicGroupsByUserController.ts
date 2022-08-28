@@ -14,9 +14,7 @@ export class ListAcademicGroupsByUserController implements IHttpController {
 
     if (params.error) throw new InvalidFieldError(params.error.message)
 
-    const { userId } = request.params
-
-    const result = await this.listAcademicGroupsByUserUsecase.execute(userId)
+    const result = await this.listAcademicGroupsByUserUsecase.execute(request.params)
     return {
       status: 200,
       data: result,
