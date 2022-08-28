@@ -1,4 +1,4 @@
-export interface AddressDTO {
+export interface LocationDTO {
   id: string
   street: string
   number: string

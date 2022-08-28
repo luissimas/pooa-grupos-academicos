@@ -1,6 +1,6 @@
 import { StudentDTO } from '@dtos/user'
 import { EventStatusEnum } from '@domain/entities/event'
-import { AddressDTO } from '@dtos/address'
+import { LocationDTO } from '@dtos/location'
 
 export interface EventDTO {
   id: string
@@ -8,6 +8,6 @@ export interface EventDTO {
   date: Date
   promoters: StudentDTO[]
   status: EventStatusEnum
-  location: AddressDTO
+  location: LocationDTO
   speakers: string[]
 }
