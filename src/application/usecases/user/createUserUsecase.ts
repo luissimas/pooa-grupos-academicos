@@ -6,6 +6,7 @@ import { IUserRepository } from '@repositories/userRepository'
 import { IIdService } from '@services/id'
 import { IPasswordService } from '@services/password'
 import { IUsecase } from '@usecases'
+import { UserAlreadyExists } from '@domain/errors'
 
 export type CreateUserUsecaseParams = StudentDTO | ProfessorDTO
 
@@ -23,6 +24,10 @@ export class CreateUserUsecase implements ICreateUserUsecase {
   ) {}
 
   async execute(params: CreateUserUsecaseParams): Promise<CreateUserUsecaseResult> {
+    const existingUser = await this.userRepository.getByEmail(params.email)
+
+    if (existingUser) throw new UserAlreadyExists(params.email, 'email')
+
     const id = this.idService.generate()
     const hashedPassword = await this.passwordService.hashPassword(params.password)
 
