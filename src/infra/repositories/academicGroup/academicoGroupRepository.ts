@@ -1,18 +1,18 @@
 import { AcademicGroup } from "@entities/academicGroup"
 import { IAcademicGroupRepository } from "@repositories/academicGroupRepository"
 
-export class MemoryAcademicUserRepository implements IAcademicGroupRepository {
+export class MemoryAcademicGroupRepository implements IAcademicGroupRepository {
   private static academicGroups: AcademicGroup[] = []
 
   async create(academicGroup: AcademicGroup): Promise<void> {
-    MemoryAcademicUserRepository.academicGroups = [
-      ...MemoryAcademicUserRepository.academicGroups, academicGroup
+    MemoryAcademicGroupRepository.academicGroups = [
+      ...MemoryAcademicGroupRepository.academicGroups, academicGroup
     ]
   }
   async list(): Promise<AcademicGroup[]> {
-    return MemoryAcademicUserRepository.academicGroups
+    return MemoryAcademicGroupRepository.academicGroups
   }
   async getById(id: string): Promise<AcademicGroup | undefined> {
-    return MemoryAcademicUserRepository.academicGroups.find(group => group.id === id)
+    return MemoryAcademicGroupRepository.academicGroups.find(group => group.id === id)
   }
 }
