@@ -23,26 +23,26 @@ export class CreateUserController implements IHttpController {
     return Joi.object()
       .keys({
         email: Joi.string().email().required(),
-        senha: Joi.string().min(6).required(),
-        nome: Joi.string().required(),
-        idade: Joi.number().positive().required(),
-        tipo: Joi.string()
-          .pattern(/^aluno$|^professor$/)
+        password: Joi.string().min(6).required(),
+        name: Joi.string().required(),
+        age: Joi.number().positive().required(),
+        role: Joi.string()
+          .pattern(/^student$|^professor$/)
           .required(),
-        ra: Joi.when('tipo', { is: 'aluno', then: Joi.number().required() }),
-        ira: Joi.when('tipo', { is: 'aluno', then: Joi.number().required() }),
-        semestre: Joi.when('tipo', { is: 'aluno', then: Joi.number().required() }),
-        curso: Joi.when('tipo', {
-          is: 'aluno',
+        ra: Joi.when('role', { is: 'student', then: Joi.number().required() }),
+        ira: Joi.when('role', { is: 'student', then: Joi.number().required() }),
+        semester: Joi.when('role', { is: 'student', then: Joi.number().required() }),
+        course: Joi.when('role', {
+          is: 'student',
           then: Joi.object()
             .keys({
-              nome: Joi.string().required(),
-              sigla: Joi.string().required(),
+              name: Joi.string().required(),
+              abbreviation: Joi.string().required(),
             })
             .required(),
         }),
-        linhaPesquisa: Joi.when('tipo', { is: 'professor', then: Joi.string().required() }),
-        orgaoColegiado: Joi.when('tipo', { is: 'professor', then: Joi.string().required() }),
+        researchField: Joi.when('role', { is: 'professor', then: Joi.string().required() }),
+        colegiatedBody: Joi.when('role', { is: 'professor', then: Joi.string().required() }),
       })
       .validate(body)
   }
