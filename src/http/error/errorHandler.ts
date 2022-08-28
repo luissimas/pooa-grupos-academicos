@@ -1,5 +1,5 @@
 import { BaseError } from '@errors/baseError'
-import { HttpResponse, IHttpErrorHandler } from '..'
+import { HttpResponse, IHttpErrorHandler } from '@http'
 
 type StatusAssoc = {
   [key: string]: number
@@ -7,6 +7,9 @@ type StatusAssoc = {
 
 const httpStatus: StatusAssoc = {
   EntityNotFound: 404,
+  InvalidFieldError: 400,
+  UnauthorizedError: 403,
+  UserAlreadyExists: 409,
   // TODO: Map possible errors
 }
 
@@ -18,6 +21,9 @@ export class HttpErrorHandler implements IHttpErrorHandler {
     const status = httpStatus[name] || 500
 
     if (status === 500) {
+      // NOTE: Logging error for debugging
+      console.log(error)
+
       return {
         status,
         data: {

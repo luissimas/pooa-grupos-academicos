@@ -29,3 +29,14 @@ yarn start
 #+end_src
 
 Agora, basta acessar a documentação da API através do seguinte link: [[http://localhost:3333/docs]].
+
+** Autenticação
+Para utilizar o serviço de autenticação do sistema, basta utilizar as rotas de login e cadastro disponíveis na [[https://pooa-grupos-academicos.herokuapp.com/docs][documentação]]. Os tokens de autenticação gerados podem ser validados utilizando a chave pública:
+
+#+begin_example
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBAJ/e4bsASz64EGK9Jt5m0njW/mghAe4u/QoI3YTc4U6F8ULHzCrMZ6mz
+tut+84Rcwe4ufpVfYx4Nd4zGwCoxIo9SijXaIA+1zY+l+XISlUuDwilJqla+sSrG
+ZcrBT1hZCw0hN0aDNyByMkxAekicrkJAWbOwe5rldIBxNUKJ+qdBAgMBAAE=
+-----END RSA PUBLIC KEY-----
+#+end_example
