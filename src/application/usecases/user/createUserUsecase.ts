@@ -1,13 +1,13 @@
-import { AlunoDTO, ProfessorDTO } from '@application/dtos/user'
-import { Aluno } from '@entities/aluno'
+import { StudentDTO, ProfessorDTO } from '@application/dtos/user'
+import { Student } from '@entities/student'
 import { Professor } from '@entities/professor'
-import { UsuarioTipoEnum } from '@entities/usuario'
+import { UserRoleEnum } from '@entities/user'
 import { IUserRepository } from '@repositories/userRepository'
 import { IIdService } from '@services/id'
 import { IPasswordService } from '@services/password'
 import { IUsecase } from '@usecases'
 
-export type CreateUserUsecaseParams = AlunoDTO | ProfessorDTO
+export type CreateUserUsecaseParams = StudentDTO | ProfessorDTO
 
 export type CreateUserUsecaseResult = {
   id: string
@@ -24,12 +24,12 @@ export class CreateUserUsecase implements ICreateUserUsecase {
 
   async execute(params: CreateUserUsecaseParams): Promise<CreateUserUsecaseResult> {
     const id = this.idService.generate()
-    const hashedPassword = await this.passwordService.hashPassword(params.senha)
+    const hashedPassword = await this.passwordService.hashPassword(params.password)
 
     const user =
-      params.tipo === UsuarioTipoEnum.Aluno
-        ? new Aluno({ ...params, senha: hashedPassword } as AlunoDTO, id)
-        : new Professor({ ...params, senha: hashedPassword } as ProfessorDTO, id)
+      params.role === UserRoleEnum.Student
+        ? new Student({ ...params, password: hashedPassword, id } as Student)
+        : new Professor({ ...params, password: hashedPassword, id } as Professor)
 
     this.userRepository.create(user)
 

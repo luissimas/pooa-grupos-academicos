@@ -1,4 +1,4 @@
-import { Usuario } from '@entities/usuario'
+import { User } from '@entities/user'
 import { BaseError } from '@errors/baseError'
 
 export type HttpRequest = {
@@ -7,7 +7,7 @@ export type HttpRequest = {
   params?: any
   query?: any
   context?: {
-    user?: Usuario
+    user?: User
   }
 }
 
