@@ -14,7 +14,7 @@ export interface StudentDTO extends UserDTO {
   ra: number
   ira: number
   semester: number
-  course: CourseDTO
+  course: Omit<CourseDTO, 'id'>
 }
 
 export interface ProfessorDTO extends UserDTO {
