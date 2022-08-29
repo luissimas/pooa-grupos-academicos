@@ -1,7 +1,10 @@
-import { CreateAcademicGroupUsecaseResult, ICreateAcademicGroupUsecase } from "@usecases/academicGroup/createAcademicGroupUsecase"
-import { HttpRequest, HttpResponse, IHttpController } from "@http"
-import { InvalidFieldError } from "@errors"
-import Joi from "joi"
+import {
+  CreateAcademicGroupUsecaseResult,
+  ICreateAcademicGroupUsecase,
+} from '@usecases/academicGroup/createAcademicGroupUsecase'
+import { HttpRequest, HttpResponse, IHttpController } from '@http'
+import { InvalidFieldError } from '@errors'
+import Joi from 'joi'
 
 export class CreateAcademicGroupController implements IHttpController {
   constructor(private readonly createAcademicGroupUsecase: ICreateAcademicGroupUsecase) {}
@@ -12,17 +15,31 @@ export class CreateAcademicGroupController implements IHttpController {
 
     if (params.error) throw new InvalidFieldError(params.error.message)
 
-    const id = await this.createAcademicGroupUsecase.execute(params.value)
+    const id = await this.createAcademicGroupUsecase.execute({
+      ...params.value,
+      foundationDate: new Date(params.value.foundationDate),
+    })
     return {
       status: 201,
-      data: id
+      data: id,
     }
   }
 
   private validateBody(body: any) {
     return Joi.object()
       .keys({
-        // TODO: Implementar
+        name: Joi.string().required(),
+        description: Joi.string().required(),
+        foundationDate: Joi.string().isoDate(),
+        department: Joi.object()
+          .keys({
+            name: Joi.string().required(),
+            abbreviation: Joi.string().required(),
+          })
+          .required(),
+        sponsorId: Joi.string().uuid().required(),
+        members: Joi.array().items(Joi.string().uuid().required()),
+        maxMembers: Joi.number().positive().required(),
       })
       .validate(body)
   }
