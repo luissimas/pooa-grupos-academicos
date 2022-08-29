@@ -23,3 +23,9 @@ export class UnauthorizedError extends BaseError {
     super(message)
   }
 }
+
+export class BusinessLogicError extends BaseError {
+  constructor(message: string) {
+    super(message)
+  }
+}
