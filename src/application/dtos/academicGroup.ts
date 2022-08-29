@@ -1,9 +1,8 @@
-import { AcademicGroupStatusEnum } from "@entities/academicGroup"
-import { DepartmentDTO } from "@dtos/department"
-import { StudentDTO, UserDTO } from "@dtos/user"
-import { RecruitmentProcessDTO } from "@dtos/recruitmentProcess"
-import { EventDTO } from "@dtos/event"
-
+import { AcademicGroupStatusEnum } from '@entities/academicGroup'
+import { DepartmentDTO } from '@dtos/department'
+import { StudentDTO, UserDTO } from '@dtos/user'
+import { RecruitmentProcessDTO } from '@dtos/recruitmentProcess'
+import { EventDTO } from '@dtos/event'
 
 export interface AcademicGroupDTO {
   id: string
