@@ -1,5 +1,5 @@
 import { UuidIdService } from '@infra/id/uuidIdService'
-import { MemoryAcademicGroupRepository } from '@infra/repositories/academicGroup/academicGroupRepository'
+import { MemoryAcademicGroupRepository } from '@infra/repositories/academicGroup/memoryAcademicGroupRepository'
 import { MemoryUserRepository } from '@infra/repositories/user/memoryUserRepository'
 import {
   CreateAcademicGroupUsecase,
