@@ -71,9 +71,10 @@ const router = Router()
  *          application/json:
  *            schema:
  *              properties:
- *                token:
+ *                id:
  *                  type: string
- *                  description: Token JWT com tempo de expiração de 1 hora para ser usado nas próximas requisições.
+ *                  format: uuid
+ *                  description: Identificador do usuário criado.
  *      '400':
  *        description: Campos inválidos
  *      '401':
@@ -164,7 +165,7 @@ export { router }
  *           format: date
  *         promoters:
  *           type: array
- *           items: date
+ *           items:
  *             $ref: '#/components/schemas/Student'
  *         status:
  *           type: string
