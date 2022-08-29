@@ -20,10 +20,10 @@ export class HttpErrorHandler implements IHttpErrorHandler {
     const name = error.constructor.name
     const status = httpStatus[name] || 500
 
-    if (status === 500) {
-      // NOTE: Logging error for debugging
-      console.log(error)
+    // NOTE: Logging error for debugging
+    console.log(error)
 
+    if (status === 500) {
       return {
         status,
         data: {
