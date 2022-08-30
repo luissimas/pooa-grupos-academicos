@@ -3,7 +3,7 @@ import {
   ICreateAcademicGroupUsecase,
 } from '@usecases/academicGroup/createAcademicGroupUsecase'
 import { HttpRequest, HttpResponse, IHttpController } from '@http'
-import { InvalidFieldError } from '@errors'
+import { ForbiddenError, InvalidFieldError } from '@errors'
 import Joi from 'joi'
 
 export class CreateAcademicGroupController implements IHttpController {
@@ -12,12 +12,17 @@ export class CreateAcademicGroupController implements IHttpController {
   async handle(request: HttpRequest): Promise<HttpResponse<CreateAcademicGroupUsecaseResult>> {
     if (!request.body) throw new InvalidFieldError('body')
     const params = this.validateBody(request.body)
+    const user = request.context?.user
 
     if (params.error) throw new InvalidFieldError(params.error.message)
+    if (!user) throw new ForbiddenError()
 
     const id = await this.createAcademicGroupUsecase.execute({
-      ...params.value,
-      foundationDate: new Date(params.value.foundationDate),
+      data: {
+        ...params.value,
+        foundationDate: new Date(params.value.foundationDate),
+      },
+      user,
     })
     return {
       status: 201,

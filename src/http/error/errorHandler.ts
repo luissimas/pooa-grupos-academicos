@@ -6,9 +6,10 @@ type StatusAssoc = {
 }
 
 const httpStatus: StatusAssoc = {
-  EntityNotFound: 404,
   InvalidFieldError: 400,
-  UnauthorizedError: 403,
+  UnauthorizedError: 401,
+  ForbiddenError: 403,
+  EntityNotFound: 404,
   UserAlreadyExists: 409,
   BusinessLogicError: 409,
   // TODO: Map possible errors
