@@ -10,6 +10,7 @@ const httpStatus: StatusAssoc = {
   InvalidFieldError: 400,
   UnauthorizedError: 403,
   UserAlreadyExists: 409,
+  BusinessLogicError: 409,
   // TODO: Map possible errors
 }
 

@@ -32,13 +32,13 @@ export class Event {
 
   public static validateName(name: string) {
     if (name.length < 0) {
-      throw new InvalidFieldError('nome', 'Nome do evento não pode ser vazio')
+      throw new InvalidFieldError('name', 'name must contain at least 1 character')
     }
   }
 
   public static validatePromoters(promoters: Student[]) {
     if (promoters.length < 1 || promoters.length > 10) {
-      throw new InvalidFieldError('organizadores', 'Quantidade de organizadores do evento deve estar entre 1 e 10')
+      throw new InvalidFieldError('promoters', 'promoters must be an array containing 1 up to 10 elements')
     }
   }
 }

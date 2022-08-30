@@ -16,13 +16,13 @@ export class Course {
 
   public static validateName(name: string) {
     if (name.length < 3) {
-      throw new InvalidFieldError('nome', 'Nome do curso deve conter mais que 3 caracteres')
+      throw new InvalidFieldError('name', 'name must contain at least 4 characters')
     }
   }
 
   public static validateAbbreviation(abbreviation: string) {
     if (abbreviation.length < 2) {
-      throw new InvalidFieldError('nome', 'Nome do curso deve conter mais que 3 caracteres')
+      throw new InvalidFieldError('name', 'abbreviation must contain at least 2 characters')
     }
   }
 }

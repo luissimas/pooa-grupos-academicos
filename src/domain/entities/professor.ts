@@ -14,15 +14,15 @@ export class Professor extends User {
     this.collegiateBody = props.collegiateBody
   }
 
-  public static validateResearchField(linhaPesquisa: string) {
-    if (linhaPesquisa.length === 0) {
-      throw new InvalidFieldError('linhaPesquisa', 'Professor deve possuir linha de pesquisa')
+  public static validateResearchField(researchField: string) {
+    if (researchField.length === 0) {
+      throw new InvalidFieldError('researchField', 'researchField must contain at least 1 character')
     }
   }
 
-  public static validateCollegiateBody(orgaoColegiado: string) {
-    if (orgaoColegiado.length === 0) {
-      throw new InvalidFieldError('orgaoColegiado', 'Professor deve ter orgao colegiado')
+  public static validateCollegiateBody(collegiateBody: string) {
+    if (collegiateBody.length === 0) {
+      throw new InvalidFieldError('collegiateBody', 'collegiateBody must contain at least 1 character')
     }
   }
 }

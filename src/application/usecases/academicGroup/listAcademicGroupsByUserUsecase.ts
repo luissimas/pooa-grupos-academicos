@@ -22,7 +22,7 @@ export class ListAcademicGroupsByUserUsecase implements IListAcademicGroupsByUse
   async execute({ userId }: ListAcademicGroupsByUserParams): Promise<ListAcademicGroupsByUserResult> {
     const existingUser = await this.userRepository.getById(userId)
 
-    if (!existingUser) throw new EntityNotFound('usuário')
+    if (!existingUser) throw new EntityNotFound('user')
 
     const academicGroups = await this.academicGroupRepository.getByUser(userId)
     return academicGroups

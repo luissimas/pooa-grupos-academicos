@@ -4,7 +4,7 @@ import { IUsecase } from '@usecases'
 import { IIdService } from '@services/id'
 import { AcademicGroup, AcademicGroupStatusEnum } from '@entities/academicGroup'
 import { UserRoleEnum } from '@entities/user'
-import { BusinessLogicError, EntityNotFound, UnauthorizedError } from '@domain/errors'
+import { BusinessLogicError, EntityNotFound, ForbiddenError } from '@domain/errors'
 import { IUserRepository } from '@application/repositories/userRepository'
 import { DepartmentDTO } from '@application/dtos/department'
 import { Student } from '@domain/entities/student'
@@ -37,7 +37,7 @@ export class CreateAcademicGroupUsecase implements ICreateAcademicGroupUsecase {
   ) {}
 
   async execute({ user, data }: CreateAcademicGroupUsecaseParams): Promise<CreateAcademicGroupUsecaseResult> {
-    if (user.role !== UserRoleEnum.Professor) throw new UnauthorizedError('Permissão insuficiente para criar grupo')
+    if (user.role !== UserRoleEnum.Professor) throw new ForbiddenError()
 
     // Validating sponsor
     const sponsor = await this.userRepository.getById(data.sponsorId)
@@ -45,9 +45,9 @@ export class CreateAcademicGroupUsecase implements ICreateAcademicGroupUsecase {
 
     // Validating members
     const members = await Promise.all(data.members.map(id => this.userRepository.getById(id)))
-    if (members.includes(undefined)) throw new EntityNotFound('aluno')
+    if (members.includes(undefined)) throw new EntityNotFound('student')
     if (members.find(member => member!.role !== UserRoleEnum.Student))
-      throw new BusinessLogicError('Todos os membros do grupo acadêmico devem ser alunos')
+      throw new BusinessLogicError('all members of academic group must be students')
 
     const id = this.idService.generate()
     const academicGroup = new AcademicGroup({

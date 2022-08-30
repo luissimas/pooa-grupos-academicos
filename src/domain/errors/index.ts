@@ -1,26 +1,32 @@
 import { BaseError } from './baseError'
 
 export class UserAlreadyExists extends BaseError {
-  constructor(value: string, field: string, public readonly details?: string) {
+  constructor(field: string, value: string, public readonly details?: string) {
     super(`User with ${field} "${value}" already exists.`, details)
   }
 }
 
 export class EntityNotFound extends BaseError {
   constructor(public readonly entity: string, public readonly details?: string) {
-    super(`Entidade ${entity} nao encontrada.`, details)
+    super(`Entity ${entity} not found.`, details)
   }
 }
 
 export class InvalidFieldError extends BaseError {
   constructor(field: string, public readonly details?: string) {
-    super(`Campo "${field}" invalido.`, details)
+    super(`Invalid field "${field}".`, details)
   }
 }
 
 export class UnauthorizedError extends BaseError {
   constructor(message: string) {
     super(message)
+  }
+}
+
+export class ForbiddenError extends BaseError {
+  constructor() {
+    super('')
   }
 }
 

@@ -26,7 +26,7 @@ export class CreateUserUsecase implements ICreateUserUsecase {
   async execute(params: CreateUserUsecaseParams): Promise<CreateUserUsecaseResult> {
     const existingUser = await this.userRepository.getByEmail(params.email)
 
-    if (existingUser) throw new UserAlreadyExists(params.email, 'email')
+    if (existingUser) throw new UserAlreadyExists('email', params.email)
 
     const id = this.idService.generate()
     const hashedPassword = await this.passwordService.hashPassword(params.password)

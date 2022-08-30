@@ -15,7 +15,7 @@ export class Department {
 
   public static validateName(name: string) {
     if (name.length < 5) {
-      throw new InvalidFieldError('nome', 'Nome do depto deve conter mais que 5 caracteres')
+      throw new InvalidFieldError('name', 'name must contain at least 5 characters')
     }
   }
 }

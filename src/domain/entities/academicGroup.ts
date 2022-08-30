@@ -47,31 +47,31 @@ export class AcademicGroup {
 
   public static validateName(name: string) {
     if (name.length < 2) {
-      throw new InvalidFieldError('nome', 'Nome do grupo academico deve ter mais que 2 caracteres')
+      throw new InvalidFieldError('name', 'name must contain at least 3 caracters')
     }
   }
 
   public static validateDescription(description: string) {
     if (description.length < 3) {
-      throw new InvalidFieldError('descricao', 'Descricao do grupo deve ter mais que 3 caracteres')
+      throw new InvalidFieldError('description', 'description must contain at least 4 caracters')
     }
   }
 
   public static validateSponsor(sponsor: User) {
     if (!sponsor) {
-      throw new InvalidFieldError('responsavel', 'Grupo deve ter um responsavel')
+      throw new InvalidFieldError('sponsor', 'academic group must have a sponsor')
     }
   }
 
   public static validateMembers(members: Student[]) {
     if (members.length === 0) {
-      throw new InvalidFieldError('membros', 'Grupo deve ter pelo menos um membro')
+      throw new InvalidFieldError('members', 'academic group must have at least 1 member')
     }
   }
 
   public static validateMaxMembers(maxMembers: number) {
     if (maxMembers < 1) {
-      throw new InvalidFieldError('maxMembros', 'Máximo de membros do grupo não pode ser menor que 1')
+      throw new InvalidFieldError('maxMembers', 'maxMembers must be at least 1')
     }
   }
 }

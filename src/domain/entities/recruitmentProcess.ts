@@ -24,25 +24,25 @@ export class RecruitmentProcess {
 
   public static valdiateEnrolled(enrolled: number) {
     if (enrolled < 0) {
-      throw new InvalidFieldError('noInscritos', 'Não pode haver negativos inscritos no PS')
+      throw new InvalidFieldError('enrolled', 'enrolled must be a positive number')
     }
   }
 
   public static validateOpenings(openings: number) {
     if (openings < 1) {
-      throw new InvalidFieldError('noVagas', 'PS deve haver pelo menos uma vaga')
+      throw new InvalidFieldError('openings', 'openings must be a number greater than 1')
     }
   }
 
   public static validateEntrants(entrants: number) {
     if (entrants < 1) {
-      throw new InvalidFieldError('noVagas', 'PS deve haver pelo menos uma vaga')
+      throw new InvalidFieldError('entrants', 'entrants must be a number greater than 1')
     }
   }
 
   public static validateStages(stages: number) {
     if (stages < 1) {
-      throw new InvalidFieldError('noVagas', 'PS deve haver pelo menos uma vaga')
+      throw new InvalidFieldError('stages', 'stages must be a number greater than 1')
     }
   }
 }

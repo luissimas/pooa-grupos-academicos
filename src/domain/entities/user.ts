@@ -29,22 +29,22 @@ export abstract class User {
 
   public static validateName(name: string) {
     if (name.length < 3) {
-      throw new InvalidFieldError('nome', 'Nome deve conter mais que 3 caracteres')
+      throw new InvalidFieldError('name', 'name must contain at least 3 characters')
     }
   }
   public static validateAge(age: number) {
     if (!age || age < 0 || age > 130) {
-      throw new InvalidFieldError('idade', 'Idade deve ser maior que 0 e menor que 130')
+      throw new InvalidFieldError('age', 'age must be a number between 0 and 130')
     }
   }
   public static validateEmail(email: string) {
     if (email.length < 3 || !email.includes('@')) {
-      throw new InvalidFieldError('email', 'Endereco de email invalido')
+      throw new InvalidFieldError('email', 'invalid e-mail address')
     }
   }
   public static validatePassword(password: string) {
     if (password.length < 6) {
-      throw new InvalidFieldError('senha', 'A senha deve conter mais que 6 caracteres')
+      throw new InvalidFieldError('password', 'password must contain at least 6 characters')
     }
   }
 }

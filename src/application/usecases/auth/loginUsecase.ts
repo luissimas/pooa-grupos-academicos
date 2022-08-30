@@ -24,10 +24,10 @@ export class LoginUsecase implements ILoginUsecase {
 
   async execute(params: LoginUsecaseParams): Promise<LoginUsecaseResult> {
     const user = await this.userRepository.getByEmail(params.email)
-    if (!user) throw new EntityNotFound('usuário')
+    if (!user) throw new EntityNotFound('user')
 
     const passwordMatch = await this.passwordService.checkPassword(params.password, user.password)
-    if (!passwordMatch) throw new UnauthorizedError('Credenciais inválidas')
+    if (!passwordMatch) throw new UnauthorizedError('invalid credentials')
 
     const token = await this.authService.generateToken({ userId: user.id })
 
