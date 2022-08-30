@@ -10,11 +10,11 @@ export class ListAcademicGroupsByUserController implements IHttpController {
   constructor(private readonly listAcademicGroupsByUserUsecase: IListAcademicGroupsByUserUsecase) {}
 
   async handle(request: HttpRequest): Promise<HttpResponse<ListAcademicGroupsByUserResult>> {
-    const params = this.validateParams(request.params)
+    const { error, value } = this.validateParams(request.params)
 
-    if (params.error) throw new InvalidFieldError(params.error.message)
+    if (error) throw new InvalidFieldError(error.details[0].path[0] as string, error.details[0].message)
 
-    const result = await this.listAcademicGroupsByUserUsecase.execute(request.params)
+    const result = await this.listAcademicGroupsByUserUsecase.execute(value)
     return {
       status: 200,
       data: result,

@@ -37,7 +37,7 @@ export class HttpErrorHandler implements IHttpErrorHandler {
       status,
       data: {
         error: message,
-        deatils: details,
+        details: details,
       },
     }
   }
