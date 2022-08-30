@@ -91,7 +91,7 @@ router.use('/', adaptMiddleware(authMiddleware))
 /**
  * @swagger
  * /user/:userId/academicGroup:
- *   post:
+ *   get:
  *     summary: Listagem de grupos acadêmicos de um usuário.
  *     description: Lista todos os grupos acadêmicos dado um usuário.
  *     tags:
