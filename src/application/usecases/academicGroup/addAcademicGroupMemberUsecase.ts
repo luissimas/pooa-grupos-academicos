@@ -37,6 +37,8 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
     // Validating student state
     if (!student) throw new EntityNotFound('student')
     if (student.role !== UserRoleEnum.Student) throw new BusinessLogicError('user is not a student')
+    if (academicGroup.members.find(member => member.id === student.id))
+      throw new BusinessLogicError('student already is a member of this academic group')
 
     const classEnrollments = await this.classEnrolmentRepository.listByUser(params.studentId)
     const activeEnrollments = classEnrollments.filter(
