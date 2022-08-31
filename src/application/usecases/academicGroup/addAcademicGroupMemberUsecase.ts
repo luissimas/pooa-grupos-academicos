@@ -1,4 +1,4 @@
-import { ClassesEnrolmentStatusEnum } from '@application/dtos/classEnrollment'
+import { ClassesEnrollmentStatusEnum } from '@application/dtos/classEnrollment'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
 import { IClassEnrollmentRepository } from '@application/repositories/classEnrollmentRepository'
 import { IUserRepository } from '@application/repositories/userRepository'
@@ -40,7 +40,7 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
 
     const classEnrollments = await this.classEnrolmentRepository.listByUser(params.studentId)
     const activeEnrollments = classEnrollments.filter(
-      enrollment => enrollment.status === ClassesEnrolmentStatusEnum.Active
+      enrollment => enrollment.status === ClassesEnrollmentStatusEnum.Active
     )
     if (activeEnrollments.length < 3)
       throw new BusinessLogicError('student must have at least 3 active classes enrolments')

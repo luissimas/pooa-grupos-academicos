@@ -1,5 +1,5 @@
-import { ClassEnrolmentDTO } from '@application/dtos/classEnrollment'
+import { ClassEnrollmentDTO } from '@application/dtos/classEnrollment'
 
 export interface IClassEnrollmentRepository {
-  listByUser(idUser: string): Promise<ClassEnrolmentDTO[]>
+  listByUser(idUser: string): Promise<ClassEnrollmentDTO[]>
 }
