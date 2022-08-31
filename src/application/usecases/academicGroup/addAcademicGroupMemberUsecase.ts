@@ -43,7 +43,7 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
       enrollment => enrollment.status === ClassesEnrollmentStatusEnum.Active
     )
     if (activeEnrollments.length < 3)
-      throw new BusinessLogicError('student must have at least 3 active classes enrolments')
+      throw new BusinessLogicError('student must have at least 3 active class enrolments')
 
     // Updating academic group
     const newAcademicGroup = new AcademicGroup({
