@@ -101,6 +101,7 @@ router.use('/', adaptMiddleware(authMiddleware))
  *         in: path
  *         schema:
  *           type: string
+ *           format: uuid
  *     responses:
  *      '200':
  *        description: Grupos acadêmicos listados com sucesso
