@@ -3,6 +3,9 @@ import { IClassEnrollmentRepository } from '@application/repositories/classEnrol
 import axios from 'axios'
 import { v4 as uuid } from 'uuid'
 
+// Loading dotenv config
+import 'dotenv/config'
+
 type ListByUserRouteResult = number
 
 export class ApiClassEnrollmentRepository implements IClassEnrollmentRepository {
@@ -17,7 +20,7 @@ export class ApiClassEnrollmentRepository implements IClassEnrollmentRepository 
   }
 
   async listByUser(idUser: string): Promise<ClassEnrollmentDTO[]> {
-    const result: ListByUserRouteResult = await this.axios.get(`aluno/${idUser}/disciplinas`)
+    const result: ListByUserRouteResult = (await this.axios.get(`aluno/${idUser}/disciplinas`)).data
 
     const enrollments = new Array(result).fill(undefined).map(() => ({
       id: uuid(),
