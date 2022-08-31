@@ -1,10 +1,10 @@
-export interface ClassEnrolmentDTO {
+export interface ClassEnrollmentDTO {
   id: string
   idUser: string
-  status: ClassesEnrolmentStatusEnum
+  status: ClassesEnrollmentStatusEnum
 }
 
-export enum ClassesEnrolmentStatusEnum {
+export enum ClassesEnrollmentStatusEnum {
   Active = 'active',
   Inactive = 'inactive',
 }
