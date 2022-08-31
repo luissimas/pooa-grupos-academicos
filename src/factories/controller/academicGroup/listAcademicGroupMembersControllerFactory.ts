@@ -1,6 +1,6 @@
 import { listAcademicGroupMembersUsecaseFactory } from '@factories/usecase/academicGroup/listAcademicGroupMembersFactory'
 import { IHttpController } from '@http'
-import { listAcademicGroupMembersController } from '@http/controllers/academicGroup/listAcademicGroupMembersController'
+import { ListAcademicGroupMembersController } from '@http/controllers/academicGroup/listAcademicGroupMembersController'
 
 export class listAcademicGroupMembersControllerFactory {
   createController(): IHttpController {

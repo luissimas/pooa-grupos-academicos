@@ -3,19 +3,19 @@ import { IAcademicGroupRepository } from '@application/repositories/academicGrou
 import { EntityNotFound } from '@domain/errors'
 import { IUsecase } from '..'
 
-export type listAcademicGroupMembersUsecaseParams = {
+export type ListAcademicGroupMembersUsecaseParams = {
   academicGroupId: string
 }
 
-export type listAcademicGroupMembersUsecaseResult = UserDTO[]
+export type ListAcademicGroupMembersUsecaseResult = UserDTO[]
 
 export interface IListAcademicGroupMembersUsecase
-  extends IUsecase<listAcademicGroupMembersUsecaseParams, listAcademicGroupMembersUsecaseResult> {}
+  extends IUsecase<ListAcademicGroupMembersUsecaseParams, ListAcademicGroupMembersUsecaseResult> {}
 
-export class listAcademicGroupMembersUsecase implements IListAcademicGroupMembersUsecase {
+export class ListAcademicGroupMembersUsecase implements IListAcademicGroupMembersUsecase {
   constructor(private readonly academicGroupRepository: IAcademicGroupRepository) {}
 
-  async execute(params: listAcademicGroupMembersUsecaseParams): Promise<listAcademicGroupMembersUsecaseResult> {
+  async execute(params: ListAcademicGroupMembersUsecaseParams): Promise<ListAcademicGroupMembersUsecaseResult> {
     const existingGroup = await this.academicGroupRepository.getById(params.academicGroupId)
 
     if (!existingGroup) throw new EntityNotFound('group')
