@@ -5,4 +5,5 @@ export interface IAcademicGroupRepository {
   list: () => Promise<AcademicGroup[]>
   getById: (id: string) => Promise<AcademicGroup | undefined>
   getByUser: (idUser: string) => Promise<AcademicGroup[]>
+  update: (academicGroup: AcademicGroup) => Promise<void>
 }
