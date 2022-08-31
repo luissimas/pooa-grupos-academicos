@@ -17,7 +17,7 @@ export class ApiClassEnrollmentRepository implements IClassEnrollmentRepository 
   }
 
   async listByUser(idUser: string): Promise<ClassEnrollmentDTO[]> {
-    const result: ListByUserRouteResult = await axios.get(`aluno/${idUser}/disciplinas`)
+    const result: ListByUserRouteResult = await this.axios.get(`aluno/${idUser}/disciplinas`)
 
     const enrollments = new Array(result).fill(undefined).map(() => ({
       id: uuid(),
