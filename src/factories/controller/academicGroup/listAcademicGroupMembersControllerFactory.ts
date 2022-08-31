@@ -5,8 +5,7 @@ import { ListAcademicGroupMembersController } from '@http/controllers/academicGr
 export class listAcademicGroupMembersControllerFactory {
   createController(): IHttpController {
     const listAcademicGroupMembersUsecase = new listAcademicGroupMembersUsecaseFactory().createUsecase()
-    const listAcademicGroupMembersController = new listAcademicGroupMembersController(listAcademicGroupMembersUsecase)
-    // nao imagino o que esta errado aqui, a questao do tipo que ele levanta nao significa nada pra mim
+    const listAcademicGroupMembersController = new ListAcademicGroupMembersController(listAcademicGroupMembersUsecase)
 
     return listAcademicGroupMembersController
   }
