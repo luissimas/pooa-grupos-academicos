@@ -77,6 +77,42 @@ router.use('/', adaptMiddleware(authMiddleware))
  */
 router.post('/', adaptController(createAcademicGroupController))
 
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/member/new:
+ *   put:
+ *     summary: Adição de membros.
+ *     description: Adiciona um novo membro a um grupo acadêmico cadastrado no sistema.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     requestBody:
+ *       content:
+ *         'application/json':
+ *           schema:
+ *            properties:
+ *              studentId:
+ *                type: string
+ *                format: uuid
+ *            required:
+ *              - studentId
+ *     responses:
+ *      '204':
+ *        description: Membro adicionado com sucesso
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Usuário ou grupo acadêmico não encontrado
+ *      '409':
+ *        description: Usuário não pode ser adicionado ao grupo acadêmico
+ *      '500':
+ *        description: Erro interno no servidor
+ */
 router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMemberController))
 
 export { router }
