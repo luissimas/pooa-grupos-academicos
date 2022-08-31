@@ -1,10 +1,10 @@
-import { AddAcademicGroupMemberUsecase } from '@application/usecases/academicGroup/addAcademicGroupMemberUsecase'
+import { IAddAcademicGroupMemberUsecase } from '@application/usecases/academicGroup/addAcademicGroupMemberUsecase'
 import { InvalidFieldError } from '@domain/errors'
 import { HttpRequest, HttpResponse, IHttpController } from '@http'
 import Joi from 'joi'
 
 export class AddAcademicGroupMemberController implements IHttpController {
-  constructor(private readonly addAcademicGroupMemberUsecase: AddAcademicGroupMemberUsecase) {}
+  constructor(private readonly addAcademicGroupMemberUsecase: IAddAcademicGroupMemberUsecase) {}
 
   async handle(request: HttpRequest): Promise<HttpResponse<void>> {
     const bodyValidation = this.validateBody(request.body)

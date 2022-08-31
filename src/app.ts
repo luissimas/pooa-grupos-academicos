@@ -1,10 +1,10 @@
 import express from 'express'
 import { router } from '@routes'
+import { adaptErrorHandler } from '@http/adapters/expressErrorHandlerAdapter'
+import { HttpErrorHandler } from '@http/error/errorHandler'
 
 // Loading dotenv config
 import 'dotenv/config'
-import { adaptErrorHandler } from '@http/adapters/expressErrorHandlerAdapter'
-import { HttpErrorHandler } from '@http/error/errorHandler'
 
 const app = express()
 

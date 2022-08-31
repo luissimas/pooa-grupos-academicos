@@ -1,4 +1,5 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
+import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
@@ -6,6 +7,7 @@ import { Router } from 'express'
 
 const authMiddleware = new AuthMiddlewareFactory().createMiddleware()
 const createAcademicGroupController = new CreateAcademicGroupControllerFactory().createController()
+const addAcademicGroupMemberController = new AddAcademicGroupMemberControllerFactory().createController()
 
 const router = Router()
 
@@ -74,5 +76,7 @@ router.use('/', adaptMiddleware(authMiddleware))
  *        description: Erro interno no servidor
  */
 router.post('/', adaptController(createAcademicGroupController))
+
+router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMemberController))
 
 export { router }
