@@ -7,7 +7,7 @@ import { MemoryUserRepository } from '@infra/repositories/user/memoryUserReposit
 
 export class ListAcademicGroupsByUserUsecaseFactory {
   createUsecase(): IListAcademicGroupsByUserUsecase {
-    const academicGroupRepository = new MemoryAcademicGroupRepository()
+    const academicGroupRepository = MemoryAcademicGroupRepository.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
 
     const listAcademicGroupsByUserUsecase = new ListAcademicGroupsByUserUsecase(academicGroupRepository, userRepository)

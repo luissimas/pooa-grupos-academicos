@@ -4,6 +4,8 @@ import { AcademicGroup, AcademicGroupStatusEnum } from '@entities/academicGroup'
 import { IAcademicGroupRepository } from '@repositories/academicGroupRepository'
 
 export class MemoryAcademicGroupRepository implements IAcademicGroupRepository {
+  private static instance: MemoryAcademicGroupRepository
+
   private static academicGroups: AcademicGroup[] = [
     {
       id: 'd5ebc700-a4be-41c2-9a49-48d1ba346a10',
@@ -163,6 +165,15 @@ export class MemoryAcademicGroupRepository implements IAcademicGroupRepository {
       } as Professor,
     },
   ]
+
+  private constructor() {}
+
+  public static getInstance(): MemoryAcademicGroupRepository {
+    if (!MemoryAcademicGroupRepository.instance)
+      MemoryAcademicGroupRepository.instance = new MemoryAcademicGroupRepository()
+
+    return MemoryAcademicGroupRepository.instance
+  }
 
   async create(academicGroup: AcademicGroup): Promise<void> {
     MemoryAcademicGroupRepository.academicGroups = [...MemoryAcademicGroupRepository.academicGroups, academicGroup]
