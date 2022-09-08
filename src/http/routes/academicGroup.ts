@@ -77,6 +77,35 @@ router.use('/', adaptMiddleware(authMiddleware))
  */
 router.post('/', adaptController(createAcademicGroupController))
 
-router.get('/:groupId', adaptController(listAcademicGroupMembersController))
+/**
+ * @swagger
+ * /academicGroup/:groupId/member:
+ *   get:
+ *     summary: Listagem de membros de um grupo acadêmico.
+ *     description: Lista todos os membros de um grupo acadêmico dado seu `groupId`.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: groupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *     responses:
+ *      '200':
+ *        description: Membros listados com sucesso
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Student'
+ *      '400':
+ *        description: Campos inválidos
+ *      '404':
+ *        description: Grupo acadêmico não encontrado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.get('/:groupId/member', adaptController(listAcademicGroupMembersController))
 
 export { router }
