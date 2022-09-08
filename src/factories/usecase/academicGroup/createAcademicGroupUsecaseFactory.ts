@@ -9,7 +9,7 @@ import {
 export class CreateAcademicGroupUsecaseFactory {
   createUsecase(): ICreateAcademicGroupUsecase {
     const academicGroupRepository = new MemoryAcademicGroupRepository()
-    const userRepository = new MemoryUserRepository()
+    const userRepository = MemoryUserRepository.getInstance()
     const idService = new UuidIdService()
 
     const createAcademicGroupUsecase = new CreateAcademicGroupUsecase(

@@ -4,6 +4,8 @@ import { User, UserRoleEnum } from '@entities/user'
 import { IUserRepository } from '@repositories/userRepository'
 
 export class MemoryUserRepository implements IUserRepository {
+  private static instance: MemoryUserRepository
+
   private static users: User[] = [
     {
       id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -48,6 +50,14 @@ export class MemoryUserRepository implements IUserRepository {
       researchField: 'Compiladores',
     } as Professor,
   ]
+
+  private constructor() {}
+
+  public static getInstance(): MemoryUserRepository {
+    if (!MemoryUserRepository.instance) MemoryUserRepository.instance = new MemoryUserRepository()
+
+    return MemoryUserRepository.instance
+  }
 
   async create(user: User): Promise<void> {
     MemoryUserRepository.users = [...MemoryUserRepository.users, user]
