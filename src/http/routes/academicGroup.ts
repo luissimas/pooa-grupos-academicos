@@ -1,4 +1,5 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
+import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
 import { listAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
@@ -8,6 +9,7 @@ import { Router } from 'express'
 const authMiddleware = new AuthMiddlewareFactory().createMiddleware()
 const createAcademicGroupController = new CreateAcademicGroupControllerFactory().createController()
 const listAcademicGroupMembersController = new listAcademicGroupMembersControllerFactory().createController()
+const addAcademicGroupMemberController = new AddAcademicGroupMemberControllerFactory().createController()
 
 const router = Router()
 
@@ -109,5 +111,43 @@ router.post('/', adaptController(createAcademicGroupController))
  *        description: Erro interno no servidor
  */
 router.get('/:groupId/member', adaptController(listAcademicGroupMembersController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/member/new:
+ *   put:
+ *     summary: Adição de membros.
+ *     description: Adiciona um novo membro a um grupo acadêmico cadastrado no sistema.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     requestBody:
+ *       content:
+ *         'application/json':
+ *           schema:
+ *            properties:
+ *              studentId:
+ *                type: string
+ *                format: uuid
+ *            required:
+ *              - studentId
+ *     responses:
+ *      '204':
+ *        description: Membro adicionado com sucesso
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Usuário ou grupo acadêmico não encontrado
+ *      '409':
+ *        description: Usuário não pode ser adicionado ao grupo acadêmico
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMemberController))
 
 export { router }
