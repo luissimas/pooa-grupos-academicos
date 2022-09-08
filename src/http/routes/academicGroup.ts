@@ -1,12 +1,14 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
 import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
+import { listAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'
 
 const authMiddleware = new AuthMiddlewareFactory().createMiddleware()
 const createAcademicGroupController = new CreateAcademicGroupControllerFactory().createController()
+const listAcademicGroupMembersController = new listAcademicGroupMembersControllerFactory().createController()
 const addAcademicGroupMemberController = new AddAcademicGroupMemberControllerFactory().createController()
 
 const router = Router()
@@ -76,6 +78,39 @@ router.use('/', adaptMiddleware(authMiddleware))
  *        description: Erro interno no servidor
  */
 router.post('/', adaptController(createAcademicGroupController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/member:
+ *   get:
+ *     summary: Listagem de membros de um grupo acadêmico.
+ *     description: Lista todos os membros de um grupo acadêmico dado seu `groupId`.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *     responses:
+ *      '200':
+ *        description: Membros listados com sucesso
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                oneOf:
+ *                  - $ref: '#/components/schemas/Student'
+ *                  - $ref: '#/components/schemas/Professor'
+ *      '400':
+ *        description: Campos inválidos
+ *      '404':
+ *        description: Grupo acadêmico não encontrado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.get('/:academicGroupId/member', adaptController(listAcademicGroupMembersController))
 
 /**
  * @swagger
