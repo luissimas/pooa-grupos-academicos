@@ -26,7 +26,7 @@ export class ListAcademicGroupMembersController implements IHttpController {
   private validateParams(params: any) {
     return Joi.object()
       .keys({
-        groupId: Joi.string().uuid().required(),
+        academicGroupId: Joi.string().uuid().required(),
       })
       .validate(params)
   }

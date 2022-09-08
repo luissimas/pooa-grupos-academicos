@@ -81,14 +81,14 @@ router.post('/', adaptController(createAcademicGroupController))
 
 /**
  * @swagger
- * /academicGroup/:groupId/member:
+ * /academicGroup/:academicGroupId/member:
  *   get:
  *     summary: Listagem de membros de um grupo acadêmico.
  *     description: Lista todos os membros de um grupo acadêmico dado seu `groupId`.
  *     tags:
  *       - Grupo acadêmico
  *     parameters:
- *       - name: groupId
+ *       - name: academicGroupId
  *         in: path
  *         schema:
  *           type: string
@@ -110,7 +110,7 @@ router.post('/', adaptController(createAcademicGroupController))
  *      '500':
  *        description: Erro interno no servidor
  */
-router.get('/:groupId/member', adaptController(listAcademicGroupMembersController))
+router.get('/:academicGroupId/member', adaptController(listAcademicGroupMembersController))
 
 /**
  * @swagger
