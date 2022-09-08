@@ -5,7 +5,7 @@ import { AuthMiddleware } from '@middlewares/auth'
 
 export class AuthMiddlewareFactory {
   createMiddleware(): IHttpMiddleware {
-    const authService = new JwtAuthService()
+    const authService = JwtAuthService.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
 
     const authMiddleware = new AuthMiddleware(authService, userRepository)

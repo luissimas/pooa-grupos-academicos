@@ -6,8 +6,8 @@ import { CreateUserUsecase, ICreateUserUsecase } from '@usecases/user/createUser
 export class CreateUserUsecaseFactory {
   createUsecase(): ICreateUserUsecase {
     const userRepository = MemoryUserRepository.getInstance()
-    const idService = new UuidIdService()
-    const passwordService = new BcryptPasswordService()
+    const idService = UuidIdService.getInstance()
+    const passwordService = BcryptPasswordService.getInstance()
 
     const createUserUsecase = new CreateUserUsecase(userRepository, idService, passwordService)
 

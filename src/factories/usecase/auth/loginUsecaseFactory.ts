@@ -6,8 +6,8 @@ import { ILoginUsecase, LoginUsecase } from '@usecases/auth/loginUsecase'
 export class LoginUsecaseFactory {
   createUsecase(): ILoginUsecase {
     const userRepository = MemoryUserRepository.getInstance()
-    const passwordService = new BcryptPasswordService()
-    const authService = new JwtAuthService()
+    const passwordService = BcryptPasswordService.getInstance()
+    const authService = JwtAuthService.getInstance()
 
     const loginUsecase = new LoginUsecase(userRepository, passwordService, authService)
 
