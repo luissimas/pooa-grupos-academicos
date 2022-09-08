@@ -10,7 +10,7 @@ export class AddAcademicGroupMemberUsecaseFactory {
   createUsecase(): IAddAcademicGroupMemberUsecase {
     const academicGroupRepository = MemoryAcademicGroupRepository.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
-    const classEnrolmentRepository = new ApiClassEnrollmentRepository()
+    const classEnrolmentRepository = ApiClassEnrollmentRepository.getInstance()
 
     const addAcademicGroupMemberUsecase = new AddAcademicGroupMemberUsecase(
       academicGroupRepository,
