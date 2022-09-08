@@ -98,7 +98,9 @@ router.post('/', adaptController(createAcademicGroupController))
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/Student'
+ *                oneOf:
+ *                  - $ref: '#/components/schemas/Student'
+ *                  - $ref: '#/components/schemas/Professor'
  *      '400':
  *        description: Campos inválidos
  *      '404':
