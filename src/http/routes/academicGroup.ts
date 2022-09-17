@@ -3,6 +3,7 @@ import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/a
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
 import { DisableAcademicGroupControllerFactory } from '@factories/controller/academicGroup/disableAcademicGroupControllerFactory'
 import { ListAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
+import { UpdateAcademicGroupSponsorControllerFactory } from '@factories/controller/academicGroup/updateAcademicGroupSponsorControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'
@@ -12,6 +13,7 @@ const createAcademicGroupController = CreateAcademicGroupControllerFactory.creat
 const listAcademicGroupMembersController = ListAcademicGroupMembersControllerFactory.createController()
 const addAcademicGroupMemberController = AddAcademicGroupMemberControllerFactory.createController()
 const disableAcademicGroupController = DisableAcademicGroupControllerFactory.createController()
+const updateAcademicGroupSponsorController = UpdateAcademicGroupSponsorControllerFactory.createController()
 
 const router = Router()
 
@@ -166,16 +168,6 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *         schema:
  *           type: string
  *           format: uuid
- *     requestBody:
- *       content:
- *         'application/json':
- *           schema:
- *            properties:
- *              studentId:
- *                type: string
- *                format: uuid
- *            required:
- *              - studentId
  *     responses:
  *      '204':
  *        description: Grupo acadêmico desativado com sucesso
@@ -189,5 +181,43 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *        description: Erro interno no servidor
  */
 router.put('/:academicGroupId/disable', adaptController(disableAcademicGroupController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/sponsor:
+ *   put:
+ *     summary: Alteração de responsável.
+ *     description: Altera o responsável pelo grupo acadêmico. Operação permitida apenas para o atual responsável pelo grupo.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     requestBody:
+ *       content:
+ *         'application/json':
+ *           schema:
+ *            properties:
+ *              sponsorId:
+ *                type: string
+ *                format: uuid
+ *            required:
+ *              - sponsorId
+ *     responses:
+ *      '204':
+ *        description: Responsável atualizado com sucesso
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Usuário ou grupo acadêmico não encontrado
+ *      '409':
+ *        description: Responsável não pode ser atualizado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.put('/:academicGroupId/sponsor', adaptController(updateAcademicGroupSponsorController))
 
 export { router }
