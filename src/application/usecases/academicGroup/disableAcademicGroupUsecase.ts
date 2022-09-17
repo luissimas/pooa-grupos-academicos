@@ -1,6 +1,5 @@
 import { UserDTO } from '@application/dtos/user'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
-import { IUserRepository } from '@application/repositories/userRepository'
 import { AcademicGroupStatusEnum } from '@domain/entities/academicGroup'
 import { UserRoleEnum } from '@domain/entities/user'
 import { BusinessLogicError, EntityNotFound, ForbiddenError } from '@domain/errors'
