@@ -152,6 +152,42 @@ router.get('/:academicGroupId/member', adaptController(listAcademicGroupMembersC
  */
 router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMemberController))
 
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/disable:
+ *   put:
+ *     summary: Desativamento de grupos acadêmicos.
+ *     description: Desativa um grupo acadêmico. Operação permitida apenas para professores.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     requestBody:
+ *       content:
+ *         'application/json':
+ *           schema:
+ *            properties:
+ *              studentId:
+ *                type: string
+ *                format: uuid
+ *            required:
+ *              - studentId
+ *     responses:
+ *      '204':
+ *        description: Grupo acadêmico desativado com sucesso
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Usuário ou grupo acadêmico não encontrado
+ *      '409':
+ *        description: Grupo acadêmico não pode ser desativado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
 router.put('/:academicGroupId/disable', adaptController(disableAcademicGroupController))
 
 export { router }
