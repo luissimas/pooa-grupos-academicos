@@ -23,6 +23,9 @@ export class DisableAcademicGroupUsecase implements IDisableAcademicGroupUsecase
 
     if (!academicGroup) throw new EntityNotFound('academic group')
 
+    if (user.id !== academicGroup.sponsor.id)
+      throw new ForbiddenError('an academic group can be disabled only by its sponsor')
+
     if (academicGroup.status !== AcademicGroupStatusEnum.Active)
       throw new BusinessLogicError('academic group is not currently active')
 
