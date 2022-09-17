@@ -14,7 +14,7 @@ export class DisableAcademicGroupController implements IHttpController {
       throw new InvalidFieldError(error!.details[0].path[0] as string, error!.details[0].message)
     }
 
-    if (!request.context?.user) throw new UnauthorizedError('')
+    if (!request.context?.user) throw new UnauthorizedError()
 
     await this.disableAcademicGroupUsecase.execute({
       academicGroupId: request.params.academicGroupId,

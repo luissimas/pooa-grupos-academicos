@@ -17,7 +17,7 @@ export class DisableAcademicGroupUsecase implements IDisableAcademicGroupUsecase
   constructor(private readonly academicGroupRepository: IAcademicGroupRepository) {}
 
   async execute({ user, academicGroupId }: DisableAcademicGroupUsecaseParams): Promise<void> {
-    if (user.role !== UserRoleEnum.Professor) throw new ForbiddenError()
+    if (user.role !== UserRoleEnum.Professor) throw new ForbiddenError('only professors can disable academic groups')
 
     const academicGroup = await this.academicGroupRepository.getById(academicGroupId)
 

@@ -19,14 +19,14 @@ export class InvalidFieldError extends BaseError {
 }
 
 export class UnauthorizedError extends BaseError {
-  constructor(message: string) {
+  constructor(message?: string) {
     super(message)
   }
 }
 
 export class ForbiddenError extends BaseError {
-  constructor() {
-    super('')
+  constructor(message?: string) {
+    super(message)
   }
 }
 
