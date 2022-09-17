@@ -1,6 +1,7 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
 import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
+import { DisableAcademicGroupControllerFactory } from '@factories/controller/academicGroup/disableAcademicGroupControllerFactory'
 import { ListAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
@@ -10,6 +11,7 @@ const authMiddleware = AuthMiddlewareFactory.createMiddleware()
 const createAcademicGroupController = CreateAcademicGroupControllerFactory.createController()
 const listAcademicGroupMembersController = ListAcademicGroupMembersControllerFactory.createController()
 const addAcademicGroupMemberController = AddAcademicGroupMemberControllerFactory.createController()
+const disableAcademicGroupController = DisableAcademicGroupControllerFactory.createController()
 
 const router = Router()
 
@@ -149,5 +151,7 @@ router.get('/:academicGroupId/member', adaptController(listAcademicGroupMembersC
  *        description: Erro interno no servidor
  */
 router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMemberController))
+
+router.put('/:academicGroupId/disable', adaptController(disableAcademicGroupController))
 
 export { router }
