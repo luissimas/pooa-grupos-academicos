@@ -1,4 +1,4 @@
-import { listAcademicGroupMembersUsecaseFactory } from '@factories/usecase/academicGroup/listAcademicGroupMembersFactory'
+import { listAcademicGroupMembersUsecaseFactory } from '@factories/usecase/academicGroup/listAcademicGroupMembersUsecaseFactory'
 import { IHttpController } from '@http'
 import { ListAcademicGroupMembersController } from '@http/controllers/academicGroup/listAcademicGroupMembersController'
 
