@@ -5,8 +5,8 @@ import {
 import { MemoryAcademicGroupRepository } from '@infra/repositories/academicGroup/memoryAcademicGroupRepository'
 import { MemoryUserRepository } from '@infra/repositories/user/memoryUserRepository'
 
-export class ListAcademicGroupsByUserUsecaseFactory {
-  createUsecase(): IListAcademicGroupsByUserUsecase {
+export abstract class ListAcademicGroupsByUserUsecaseFactory {
+  static createUsecase(): IListAcademicGroupsByUserUsecase {
     const academicGroupRepository = MemoryAcademicGroupRepository.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
 

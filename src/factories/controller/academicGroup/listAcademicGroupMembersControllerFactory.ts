@@ -2,9 +2,9 @@ import { listAcademicGroupMembersUsecaseFactory } from '@factories/usecase/acade
 import { IHttpController } from '@http'
 import { ListAcademicGroupMembersController } from '@http/controllers/academicGroup/listAcademicGroupMembersController'
 
-export class listAcademicGroupMembersControllerFactory {
-  createController(): IHttpController {
-    const listAcademicGroupMembersUsecase = new listAcademicGroupMembersUsecaseFactory().createUsecase()
+export abstract class ListAcademicGroupMembersControllerFactory {
+  static createController(): IHttpController {
+    const listAcademicGroupMembersUsecase = listAcademicGroupMembersUsecaseFactory.createUsecase()
     const listAcademicGroupMembersController = new ListAcademicGroupMembersController(listAcademicGroupMembersUsecase)
 
     return listAcademicGroupMembersController

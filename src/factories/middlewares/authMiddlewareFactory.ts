@@ -3,8 +3,8 @@ import { JwtAuthService } from '@infra/auth/jwtAuthService'
 import { MemoryUserRepository } from '@infra/repositories/user/memoryUserRepository'
 import { AuthMiddleware } from '@middlewares/auth'
 
-export class AuthMiddlewareFactory {
-  createMiddleware(): IHttpMiddleware {
+export abstract class AuthMiddlewareFactory {
+  static createMiddleware(): IHttpMiddleware {
     const authService = JwtAuthService.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
 

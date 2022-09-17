@@ -6,8 +6,8 @@ import { MemoryAcademicGroupRepository } from '@infra/repositories/academicGroup
 import { ApiClassEnrollmentRepository } from '@infra/repositories/classEnrollment/apiClassEnrollmentRepository'
 import { MemoryUserRepository } from '@infra/repositories/user/memoryUserRepository'
 
-export class AddAcademicGroupMemberUsecaseFactory {
-  createUsecase(): IAddAcademicGroupMemberUsecase {
+export abstract class AddAcademicGroupMemberUsecaseFactory {
+  static createUsecase(): IAddAcademicGroupMemberUsecase {
     const academicGroupRepository = MemoryAcademicGroupRepository.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
     const classEnrolmentRepository = ApiClassEnrollmentRepository.getInstance()

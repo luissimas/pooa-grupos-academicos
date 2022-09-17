@@ -6,8 +6,8 @@ import {
   ICreateAcademicGroupUsecase,
 } from '@usecases/academicGroup/createAcademicGroupUsecase'
 
-export class CreateAcademicGroupUsecaseFactory {
-  createUsecase(): ICreateAcademicGroupUsecase {
+export abstract class CreateAcademicGroupUsecaseFactory {
+  static createUsecase(): ICreateAcademicGroupUsecase {
     const academicGroupRepository = MemoryAcademicGroupRepository.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
     const idService = UuidIdService.getInstance()
