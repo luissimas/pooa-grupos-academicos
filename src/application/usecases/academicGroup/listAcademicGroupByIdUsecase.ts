@@ -3,19 +3,19 @@ import { AcademicGroupDTO } from "@dtos/academicGroup"
 import { IUsecase } from ".."
 import { EntityNotFound } from "@errors"
 
-export type ListAcademicGroupByIdParams = {
+export type ListAcademicGroupByIdUsecaseParams = {
   academicGroupId: string
 }
 
-export type ListAcademicGroupByIdResult = AcademicGroupDTO
+export type ListAcademicGroupByIdUsecaseResult = AcademicGroupDTO
 
 export interface IListAcademicGroupByIdUsecase
-  extends IUsecase<ListAcademicGroupByIdParams, ListAcademicGroupByIdResult> {}
+  extends IUsecase<ListAcademicGroupByIdUsecaseParams, ListAcademicGroupByIdUsecaseResult> {}
 
 export class ListAcademicGroupByIdUsecase implements IListAcademicGroupByIdUsecase {
   constructor(private readonly academicGroupRepository: IAcademicGroupRepository) {}
 
-  async execute(params: ListAcademicGroupByIdParams): Promise<ListAcademicGroupByIdResult> {
+  async execute(params: ListAcademicGroupByIdUsecaseParams): Promise<ListAcademicGroupByIdUsecaseResult> {
     const existingGroup = await this.academicGroupRepository.getById(params.academicGroupId)
 
     if (!existingGroup) throw new EntityNotFound('group')
