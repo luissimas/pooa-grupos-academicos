@@ -6,7 +6,6 @@ import { ListAcademicGroupsControllerFactory } from '@factories/controller/acade
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'
-import swaggerJSDoc from 'swagger-jsdoc'
 
 const authMiddleware = AuthMiddlewareFactory.createMiddleware()
 const createAcademicGroupController = CreateAcademicGroupControllerFactory.createController()
