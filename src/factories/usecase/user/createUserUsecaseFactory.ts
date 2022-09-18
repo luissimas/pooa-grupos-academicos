@@ -3,11 +3,11 @@ import { BcryptPasswordService } from '@infra/password/bcryptPasswordService'
 import { MemoryUserRepository } from '@infra/repositories/user/memoryUserRepository'
 import { CreateUserUsecase, ICreateUserUsecase } from '@usecases/user/createUserUsecase'
 
-export class CreateUserUsecaseFactory {
-  createUsecase(): ICreateUserUsecase {
-    const userRepository = new MemoryUserRepository()
-    const idService = new UuidIdService()
-    const passwordService = new BcryptPasswordService()
+export abstract class CreateUserUsecaseFactory {
+  static createUsecase(): ICreateUserUsecase {
+    const userRepository = MemoryUserRepository.getInstance()
+    const idService = UuidIdService.getInstance()
+    const passwordService = BcryptPasswordService.getInstance()
 
     const createUserUsecase = new CreateUserUsecase(userRepository, idService, passwordService)
 

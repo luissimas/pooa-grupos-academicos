@@ -9,14 +9,23 @@ import 'dotenv/config'
 type ListByUserRouteResult = number
 
 export class ApiClassEnrollmentRepository implements IClassEnrollmentRepository {
+  private static instance: ApiClassEnrollmentRepository
+
   private readonly axios
 
-  constructor() {
+  private constructor() {
     if (!process.env.CLASS_ENROLLMENT_API_BASE_URL) throw new Error('Class enrollment api base url not found')
 
     this.axios = axios.create({
       baseURL: process.env.CLASS_ENROLLMENT_API_BASE_URL,
     })
+  }
+
+  public static getInstance(): ApiClassEnrollmentRepository {
+    if (!ApiClassEnrollmentRepository.instance)
+      ApiClassEnrollmentRepository.instance = new ApiClassEnrollmentRepository()
+
+    return ApiClassEnrollmentRepository.instance
   }
 
   async listByUser(idUser: string): Promise<ClassEnrollmentDTO[]> {

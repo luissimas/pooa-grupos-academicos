@@ -5,10 +5,10 @@ import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFact
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'
 
-const authMiddleware = new AuthMiddlewareFactory().createMiddleware()
+const authMiddleware = AuthMiddlewareFactory.createMiddleware()
 
-const createUserController = new CreateUserControllerFactory().createController()
-const listAcademicGroupsByUserController = new ListAcademicGroupsByUserControllerFactory().createController()
+const createUserController = CreateUserControllerFactory.createController()
+const listAcademicGroupsByUserController = ListAcademicGroupsByUserControllerFactory.createController()
 
 const router = Router()
 

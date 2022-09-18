@@ -1,15 +1,15 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
 import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
-import { listAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
+import { ListAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'
 
-const authMiddleware = new AuthMiddlewareFactory().createMiddleware()
-const createAcademicGroupController = new CreateAcademicGroupControllerFactory().createController()
-const listAcademicGroupMembersController = new listAcademicGroupMembersControllerFactory().createController()
-const addAcademicGroupMemberController = new AddAcademicGroupMemberControllerFactory().createController()
+const authMiddleware = AuthMiddlewareFactory.createMiddleware()
+const createAcademicGroupController = CreateAcademicGroupControllerFactory.createController()
+const listAcademicGroupMembersController = ListAcademicGroupMembersControllerFactory.createController()
+const addAcademicGroupMemberController = AddAcademicGroupMemberControllerFactory.createController()
 
 const router = Router()
 

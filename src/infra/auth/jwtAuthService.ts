@@ -3,6 +3,16 @@ import { IAuthService, TokenPayload } from 'application/services/auth'
 import { sign, verify, decode } from 'jsonwebtoken'
 
 export class JwtAuthService implements IAuthService {
+  private static instance: JwtAuthService
+
+  private constructor() {}
+
+  public static getInstance(): JwtAuthService {
+    if (!JwtAuthService.instance) JwtAuthService.instance = new JwtAuthService()
+
+    return JwtAuthService.instance
+  }
+
   async generateToken(payload: TokenPayload): Promise<string> {
     if (!process.env.PRIVATE_AUTH_KEY) throw new Error('Private auth key not found')
 
