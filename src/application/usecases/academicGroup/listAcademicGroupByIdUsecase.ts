@@ -23,4 +23,3 @@ export class ListAcademicGroupByIdUsecase implements IListAcademicGroupByIdUseca
     return existingGroup
   }
 }
-
