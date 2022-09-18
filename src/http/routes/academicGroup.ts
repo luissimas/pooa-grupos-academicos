@@ -154,10 +154,10 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
 
 /**
  * @swagger
- * /academicGroup/:academicGroupId/member:
+ * /academicGroup/:academicGroupId:
  *   get:
- *     summary: Listagem de membros de um grupo acadêmico.
- *     description: Lista todos os membros de um grupo acadêmico dado seu `groupId`.
+ *     summary: Listagem de grupo acadêmico por ID.
+ *     description: Lista um grupo acadêmico com base em seu ID.
  *     tags:
  *       - Grupo acadêmico
  *     parameters:
@@ -167,7 +167,7 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *           type: string
  *     responses:
  *      '200':
- *        description: Membros listados com sucesso
+ *        description: Grupo listado com sucesso
  *        content:
  *          application/json:
  *            schema:
