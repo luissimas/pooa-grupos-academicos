@@ -40,6 +40,22 @@ export class MemoryUserRepository implements IUserRepository {
       },
     } as Student,
     {
+      id: 'ec1c550c-96da-4703-8dd3-3724cbd6a687',
+      age: 22,
+      email: 'carlos@hotmail.com',
+      name: 'Carlos Rodrigues',
+      password: '$2b$12$2QRGtU0.p8fdfb5Vhog9jeyQwep35tx59mxm3mH8u8hlfe6wpHO6q',
+      role: UserRoleEnum.Student,
+      ra: 18328,
+      ira: 16994,
+      semester: 6,
+      course: {
+        id: '1fc8c9cb-7203-4d5a-9f47-0abc8cc14e28',
+        abbreviation: 'BCC',
+        name: 'Bacharelado em Ciência da Computação',
+      },
+    } as Student,
+    {
       id: '753d4f0c-daff-4048-9bd9-d1da5131ecc5',
       age: 46,
       email: 'ana@hotmail.com',
