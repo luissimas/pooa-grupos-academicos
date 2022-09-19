@@ -171,11 +171,7 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *        content:
  *          application/json:
  *            schema:
- *              type: array
- *              items:
- *                oneOf:
- *                  - $ref: '#/components/schemas/Student'
- *                  - $ref: '#/components/schemas/Professor'
+ *              $ref: '#/components/schemas/AcademicGroup'
  *      '400':
  *        description: Campos inválidos
  *      '404':
@@ -183,6 +179,6 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *      '500':
  *        description: Erro interno no servidor
  */
- router.get('/:academicGroupId', adaptController(listAcademicGroupByIdController))
+router.get('/:academicGroupId', adaptController(listAcademicGroupByIdController))
 
 export { router }
