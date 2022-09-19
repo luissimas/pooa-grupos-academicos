@@ -1,12 +1,13 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
 import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
-import { ListAcademicGroupByIdControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupByIdControllerFactory'
 import { DisableAcademicGroupControllerFactory } from '@factories/controller/academicGroup/disableAcademicGroupControllerFactory'
+import { ListAcademicGroupByIdControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupByIdControllerFactory'
 import { ListAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
-import { RemoveAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/RemoveAcademicGroupMemberControllerFactory'
 import { ListAcademicGroupsControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupsControllerFactory'
+import { RemoveAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/RemoveAcademicGroupMemberControllerFactory'
 import { UpdateAcademicGroupSponsorControllerFactory } from '@factories/controller/academicGroup/updateAcademicGroupSponsorControllerFactory'
+import { ListEventByAcademicGroupControllerFactory } from '@factories/controller/event/ListEventByAcademicGroupControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'
@@ -14,6 +15,7 @@ import { Router } from 'express'
 const authMiddleware = AuthMiddlewareFactory.createMiddleware()
 const createAcademicGroupController = CreateAcademicGroupControllerFactory.createController()
 const listAcademicGroupMembersController = ListAcademicGroupMembersControllerFactory.createController()
+const listEventByAcademicGroupController = ListEventByAcademicGroupControllerFactory.createController()
 const addAcademicGroupMemberController = AddAcademicGroupMemberControllerFactory.createController()
 const removeAcademicGroupMemberController = RemoveAcademicGroupMemberControllerFactory.createController()
 const listAcademicGroupsController = ListAcademicGroupsControllerFactory.createController()
@@ -121,6 +123,32 @@ router.post('/', adaptController(createAcademicGroupController))
  *        description: Erro interno no servidor
  */
 router.get('/:academicGroupId/member', adaptController(listAcademicGroupMembersController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/event:
+ *   get:
+ *     summary: Listagem de eventos por grupo acadêmico.
+ *     description: Lista todos os eventos relacionados a um grupo acadêmico dado seu id.
+ *     tags:
+ *       - Evento
+ *     responses:
+ *      '200':
+ *        description: Eventos listados com sucesso
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Event'
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Grupo acadêmico não encontrado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.get('/:academicGroupId/event', adaptController(listEventByAcademicGroupController))
 
 /**
  * @swagger

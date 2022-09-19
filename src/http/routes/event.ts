@@ -8,36 +8,9 @@ import { Router } from 'express'
 const router = Router()
 
 const authMiddleware = AuthMiddlewareFactory.createMiddleware()
-const listEventByAcademicGroupController = ListEventByAcademicGroupControllerFactory.createController()
 const createEventController = CreateEventControllerFactory.createController()
 
 router.use('/', adaptMiddleware(authMiddleware))
-
-/**
- * @swagger
- * /event/:academicGroupId:
- *   get:
- *     summary: Listagem de eventos por grupo acadêmico.
- *     description: Lista todos os eventos relacionados a um grupo acadêmico dado seu id.
- *     tags:
- *       - Evento
- *     responses:
- *      '200':
- *        description: Eventos listados com sucesso
- *        content:
- *          application/json:
- *            schema:
- *              type: array
- *              items:
- *                $ref: '#/components/schemas/Event'
- *      '400':
- *        description: Campos da requisição inválidos
- *      '404':
- *        description: Grupo acadêmico não encontrado
- *      '500':
- *        description: Erro interno no servidor
- */
-router.get('/:academicGroupId', adaptController(listEventByAcademicGroupController))
 
 /**
  * @swagger
