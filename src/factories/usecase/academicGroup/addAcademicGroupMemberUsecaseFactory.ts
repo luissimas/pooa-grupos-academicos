@@ -4,6 +4,7 @@ import {
 } from '@application/usecases/academicGroup/addAcademicGroupMemberUsecase'
 import { MemoryAcademicGroupRepository } from '@infra/repositories/academicGroup/memoryAcademicGroupRepository'
 import { ApiClassEnrollmentRepository } from '@infra/repositories/classEnrollment/apiClassEnrollmentRepository'
+import { ApiLibraryReservationRepository } from '@infra/repositories/libraryReservation/apiLibraryReservationRepository'
 import { MemoryUserRepository } from '@infra/repositories/user/memoryUserRepository'
 
 export abstract class AddAcademicGroupMemberUsecaseFactory {
@@ -11,11 +12,13 @@ export abstract class AddAcademicGroupMemberUsecaseFactory {
     const academicGroupRepository = MemoryAcademicGroupRepository.getInstance()
     const userRepository = MemoryUserRepository.getInstance()
     const classEnrolmentRepository = ApiClassEnrollmentRepository.getInstance()
+    const libraryReservationRepository = ApiLibraryReservationRepository.getInstance()
 
     const addAcademicGroupMemberUsecase = new AddAcademicGroupMemberUsecase(
       academicGroupRepository,
       userRepository,
-      classEnrolmentRepository
+      classEnrolmentRepository,
+      libraryReservationRepository
     )
     return addAcademicGroupMemberUsecase
   }
