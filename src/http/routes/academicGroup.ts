@@ -1,6 +1,7 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
 import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
+import { ListAcademicGroupByIdControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupByIdControllerFactory'
 import { DisableAcademicGroupControllerFactory } from '@factories/controller/academicGroup/disableAcademicGroupControllerFactory'
 import { ListAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
 import { UpdateAcademicGroupSponsorControllerFactory } from '@factories/controller/academicGroup/updateAcademicGroupSponsorControllerFactory'
@@ -12,6 +13,7 @@ const authMiddleware = AuthMiddlewareFactory.createMiddleware()
 const createAcademicGroupController = CreateAcademicGroupControllerFactory.createController()
 const listAcademicGroupMembersController = ListAcademicGroupMembersControllerFactory.createController()
 const addAcademicGroupMemberController = AddAcademicGroupMemberControllerFactory.createController()
+const listAcademicGroupByIdController = ListAcademicGroupByIdControllerFactory.createController()
 const disableAcademicGroupController = DisableAcademicGroupControllerFactory.createController()
 const updateAcademicGroupSponsorController = UpdateAcademicGroupSponsorControllerFactory.createController()
 
@@ -153,6 +155,35 @@ router.get('/:academicGroupId/member', adaptController(listAcademicGroupMembersC
  *        description: Erro interno no servidor
  */
 router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMemberController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId:
+ *   get:
+ *     summary: Listagem de grupo acadêmico por ID.
+ *     description: Lista um grupo acadêmico com base em seu ID.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *     responses:
+ *      '200':
+ *        description: Grupo listado com sucesso
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/AcademicGroup'
+ *      '400':
+ *        description: Campos inválidos
+ *      '404':
+ *        description: Grupo acadêmico não encontrado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.get('/:academicGroupId', adaptController(listAcademicGroupByIdController))
 
 /**
  * @swagger
