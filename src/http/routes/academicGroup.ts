@@ -154,17 +154,12 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
 
 /**
  * @swagger
- * /academicGroup/:
+ * /academicGroup:
  *   get:
  *     summary: Listagem de grupos acadêmicos.
  *     description: Lista todos os grupos acadêmicos cadastrados.
  *     tags:
  *       - Grupo acadêmico
- *     parameters:
- *       - name: academicGroupId
- *         in: path
- *         schema:
- *           type: string
  *     responses:
  *      '200':
  *        description: Grupos acadêmicos listados com sucesso
@@ -173,7 +168,7 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *            schema:
  *              type: array
  *              items:
- *                - $ref: '#/components/schemas/AcademicGroup'
+ *                $ref: '#/components/schemas/AcademicGroup'
  *      '500':
  *        description: Erro interno no servidor
  */
