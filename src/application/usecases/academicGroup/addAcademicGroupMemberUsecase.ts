@@ -54,7 +54,7 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
     const pendingReservations = libraryReservations.filter(
       reservation => reservation.status === LibraryReservationStatusEnum.Pending
     )
-    if (pendingReservations.length > 1)
+    if (pendingReservations.length > 0)
       throw new BusinessLogicError('student must have no pending library reservations')
 
     // Updating academic group
