@@ -1,7 +1,9 @@
 import { ClassesEnrollmentStatusEnum } from '@application/dtos/classEnrollment'
+import { LibraryReservationStatusEnum } from '@application/dtos/libraryReservation'
 import { UserDTO } from '@application/dtos/user'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
 import { IClassEnrollmentRepository } from '@application/repositories/classEnrollmentRepository'
+import { ILibraryReservationRepository } from '@application/repositories/libraryReservationRepository'
 import { IUserRepository } from '@application/repositories/userRepository'
 import { AcademicGroupStatusEnum } from '@domain/entities/academicGroup'
 import { BusinessLogicError, EntityNotFound, ForbiddenError } from '@domain/errors'
@@ -19,7 +21,8 @@ export class UpdateAcademicGroupSponsorUsecase implements IUpdateAcademicGroupSp
   constructor(
     private readonly academicGroupRepository: IAcademicGroupRepository,
     private readonly userRepository: IUserRepository,
-    private readonly classEnrollmentRepository: IClassEnrollmentRepository
+    private readonly classEnrollmentRepository: IClassEnrollmentRepository,
+    private readonly libraryReservationRepository: ILibraryReservationRepository
   ) {}
 
   async execute(params: UpdateAcademicGroupSponsorUsecaseParams): Promise<void> {
@@ -41,6 +44,13 @@ export class UpdateAcademicGroupSponsorUsecase implements IUpdateAcademicGroupSp
     const activeEnrollments = classEnrollments.filter(
       enrollment => enrollment.status === ClassesEnrollmentStatusEnum.Active
     )
+
+    const libraryReservations = await this.libraryReservationRepository.listByUser(params.sponsorId)
+    const pendingReservations = libraryReservations.filter(
+      reservation => reservation.status === LibraryReservationStatusEnum.Pending
+    )
+    if (pendingReservations.length > 0)
+      throw new BusinessLogicError('new sponsor must have no pending library reservations')
 
     if (activeEnrollments.length < 1)
       throw new BusinessLogicError('new sponsor must have at least 1 active class enrolment')
