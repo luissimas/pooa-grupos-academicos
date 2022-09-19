@@ -1,4 +1,9 @@
+import { ClassesEnrollmentStatusEnum } from '@application/dtos/classEnrollment'
+import { LibraryReservationStatusEnum } from '@application/dtos/libraryReservation'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
+import { IClassEnrollmentRepository } from '@application/repositories/classEnrollmentRepository'
+import { IEventRepository } from '@application/repositories/eventRepository'
+import { ILibraryReservationRepository } from '@application/repositories/libraryReservationRepository'
 import { IUserRepository } from '@application/repositories/userRepository'
 import { IIdService } from '@application/services/id'
 import { AcademicGroup, AcademicGroupStatusEnum } from '@domain/entities/academicGroup'
@@ -36,6 +41,9 @@ export class CreateEventUsecase implements ICreateEventUsecase {
   constructor(
     private readonly academicGroupRepository: IAcademicGroupRepository,
     private readonly userRepository: IUserRepository,
+    private readonly eventRepository: IEventRepository,
+    private readonly classEnrollmentRepository: IClassEnrollmentRepository,
+    private readonly libraryReservationRepository: ILibraryReservationRepository,
     private readonly idService: IIdService
   ) {}
 
@@ -57,10 +65,26 @@ export class CreateEventUsecase implements ICreateEventUsecase {
     const idLocation = this.idService.generate()
 
     const promoters = await Promise.all(params.promoters.map(promoter => this.userRepository.getById(promoter)))
-    promoters.map(promoter => {
-      if (!promoter) throw new EntityNotFound('promoter')
-      if (promoter.role !== UserRoleEnum.Student) throw new BusinessLogicError('promoters must be students')
-    })
+    await Promise.all(
+      promoters.map(async promoter => {
+        if (!promoter) throw new EntityNotFound('promoter')
+        if (promoter.role !== UserRoleEnum.Student) throw new BusinessLogicError('promoters must be students')
+
+        const classEnrollments = await this.classEnrollmentRepository.listByUser(promoter.id)
+        const activeEnrollments = classEnrollments.filter(
+          enrollment => enrollment.status === ClassesEnrollmentStatusEnum.Active
+        )
+        if (activeEnrollments.length < 3)
+          throw new BusinessLogicError('promoter must have at least 3 active class enrolments')
+
+        const libraryReservations = await this.libraryReservationRepository.listByUser(promoter.id)
+        const pendingReservations = libraryReservations.filter(
+          reservation => reservation.status === LibraryReservationStatusEnum.Pending
+        )
+        if (pendingReservations.length > 0)
+          throw new BusinessLogicError('promoter must have no pending library reservations')
+      })
+    )
 
     const event = new Event({
       id: idEvent,
@@ -94,6 +118,8 @@ export class CreateEventUsecase implements ICreateEventUsecase {
         } as AcademicGroup)
       )
     )
+
+    await this.eventRepository.create(event)
 
     return { id: idEvent }
   }
