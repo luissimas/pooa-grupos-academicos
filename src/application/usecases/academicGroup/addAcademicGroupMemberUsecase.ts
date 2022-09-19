@@ -1,6 +1,8 @@
 import { ClassesEnrollmentStatusEnum } from '@application/dtos/classEnrollment'
+import { LibraryReservationStatusEnum } from '@application/dtos/libraryReservation'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
 import { IClassEnrollmentRepository } from '@application/repositories/classEnrollmentRepository'
+import { ILibraryReservationRepository } from '@application/repositories/libraryReservationRepository'
 import { IUserRepository } from '@application/repositories/userRepository'
 import { AcademicGroup, AcademicGroupStatusEnum } from '@domain/entities/academicGroup'
 import { Student } from '@domain/entities/student'
@@ -19,7 +21,8 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
   constructor(
     private readonly academicGroupRepository: IAcademicGroupRepository,
     private readonly userRepository: IUserRepository,
-    private readonly classEnrollmentRepository: IClassEnrollmentRepository
+    private readonly classEnrollmentRepository: IClassEnrollmentRepository,
+    private readonly libraryReservationRepository: ILibraryReservationRepository
   ) {}
 
   async execute(params: AddAcademicGroupMemberUsecaseParams): Promise<void> {
@@ -46,6 +49,13 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
     )
     if (activeEnrollments.length < 3)
       throw new BusinessLogicError('student must have at least 3 active class enrolments')
+
+    const libraryReservations = await this.libraryReservationRepository.listByUser(params.studentId)
+    const pendingReservations = libraryReservations.filter(
+      reservation => reservation.status === LibraryReservationStatusEnum.Pending
+    )
+    if (pendingReservations.length > 0)
+      throw new BusinessLogicError('student must have no pending library reservations')
 
     // Updating academic group
     const newAcademicGroup = new AcademicGroup({
