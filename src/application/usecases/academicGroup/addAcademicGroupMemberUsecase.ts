@@ -19,7 +19,7 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
   constructor(
     private readonly academicGroupRepository: IAcademicGroupRepository,
     private readonly userRepository: IUserRepository,
-    private readonly classEnrolmentRepository: IClassEnrollmentRepository
+    private readonly classEnrollmentRepository: IClassEnrollmentRepository
   ) {}
 
   async execute(params: AddAcademicGroupMemberUsecaseParams): Promise<void> {
@@ -40,7 +40,7 @@ export class AddAcademicGroupMemberUsecase implements IAddAcademicGroupMemberUse
     if (academicGroup.members.find(member => member.id === student.id))
       throw new BusinessLogicError('student already is a member of this academic group')
 
-    const classEnrollments = await this.classEnrolmentRepository.listByUser(params.studentId)
+    const classEnrollments = await this.classEnrollmentRepository.listByUser(params.studentId)
     const activeEnrollments = classEnrollments.filter(
       enrollment => enrollment.status === ClassesEnrollmentStatusEnum.Active
     )

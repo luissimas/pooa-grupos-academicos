@@ -1,8 +1,11 @@
 import { adaptController } from '@adapters/expressControllerAdapter'
 import { AddAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/addAcademicGroupMemberControllerFactory'
 import { CreateAcademicGroupControllerFactory } from '@factories/controller/academicGroup/createAcademicGroupControllerFactory'
+import { ListAcademicGroupByIdControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupByIdControllerFactory'
+import { DisableAcademicGroupControllerFactory } from '@factories/controller/academicGroup/disableAcademicGroupControllerFactory'
 import { ListAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
 import { ListAcademicGroupsControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupsControllerFactory'
+import { UpdateAcademicGroupSponsorControllerFactory } from '@factories/controller/academicGroup/updateAcademicGroupSponsorControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'
@@ -12,6 +15,9 @@ const createAcademicGroupController = CreateAcademicGroupControllerFactory.creat
 const listAcademicGroupMembersController = ListAcademicGroupMembersControllerFactory.createController()
 const addAcademicGroupMemberController = AddAcademicGroupMemberControllerFactory.createController()
 const listAcademicGroupsController = ListAcademicGroupsControllerFactory.createController()
+const listAcademicGroupByIdController = ListAcademicGroupByIdControllerFactory.createController()
+const disableAcademicGroupController = DisableAcademicGroupControllerFactory.createController()
+const updateAcademicGroupSponsorController = UpdateAcademicGroupSponsorControllerFactory.createController()
 
 const router = Router()
 
@@ -173,5 +179,100 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *        description: Erro interno no servidor
  */
 router.get('/', adaptController(listAcademicGroupsController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId:
+ *   get:
+ *     summary: Listagem de grupo acadêmico por ID.
+ *     description: Lista um grupo acadêmico com base em seu ID.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *     responses:
+ *      '200':
+ *        description: Grupo listado com sucesso
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/AcademicGroup'
+ *      '400':
+ *        description: Campos inválidos
+ *      '404':
+ *        description: Grupo acadêmico não encontrado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.get('/:academicGroupId', adaptController(listAcademicGroupByIdController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/disable:
+ *   put:
+ *     summary: Desativamento de grupos acadêmicos.
+ *     description: Desativa um grupo acadêmico. Operação permitida apenas para professores.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     responses:
+ *      '204':
+ *        description: Grupo acadêmico desativado com sucesso
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Usuário ou grupo acadêmico não encontrado
+ *      '409':
+ *        description: Grupo acadêmico não pode ser desativado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.put('/:academicGroupId/disable', adaptController(disableAcademicGroupController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/sponsor:
+ *   put:
+ *     summary: Alteração de responsável.
+ *     description: Altera o responsável pelo grupo acadêmico. Operação permitida apenas para o atual responsável pelo grupo.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     requestBody:
+ *       content:
+ *         'application/json':
+ *           schema:
+ *            properties:
+ *              sponsorId:
+ *                type: string
+ *                format: uuid
+ *            required:
+ *              - sponsorId
+ *     responses:
+ *      '204':
+ *        description: Responsável atualizado com sucesso
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Usuário ou grupo acadêmico não encontrado
+ *      '409':
+ *        description: Responsável não pode ser atualizado
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.put('/:academicGroupId/sponsor', adaptController(updateAcademicGroupSponsorController))
 
 export { router }
