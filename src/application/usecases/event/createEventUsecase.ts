@@ -17,7 +17,7 @@ export type CreateEventUsecaseParams = {
     street: string
     number: string
     district: string
-    zipCode: number
+    zipCode: string
     complement: string
     referencePoint: string
   }
@@ -73,6 +73,8 @@ export class CreateEventUsecase implements ICreateEventUsecase {
       speakers: params.speakers,
       status: params.status,
       promoters: promoters as Student[],
+      academicGroupsPromoters: params.groupsPromoting,
+      academicGroupsInvited: params.groupsInvited,
     })
 
     await Promise.all(

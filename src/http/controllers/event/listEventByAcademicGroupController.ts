@@ -1,7 +1,7 @@
 import {
   IListEventByAcademicGroupUsecase,
   ListEventByAcademicGroupResult,
-} from '@application/usecases/event/ListEventByAcademicGroupUsecase'
+} from '@application/usecases/event/listEventByAcademicGroupUsecase'
 import { InvalidFieldError } from '@domain/errors'
 import { HttpRequest, HttpResponse, IHttpController } from '@http'
 import Joi from 'joi'

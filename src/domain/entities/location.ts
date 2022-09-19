@@ -3,7 +3,7 @@ export class Location {
   public readonly street: string
   public readonly number: string
   public readonly district: string
-  public readonly zipCode: number
+  public readonly zipCode: string
   public readonly complement: string
   public readonly referencePoint: string
 

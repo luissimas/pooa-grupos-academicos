@@ -1,6 +1,6 @@
 import { EventDTO } from '@application/dtos/event'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
-import { IEventRepository } from '@application/repositories/userRepository'
+import { IEventRepository } from '@application/repositories/eventRepository'
 import { EntityNotFound } from '@domain/errors'
 import { IUsecase } from '..'
 
@@ -10,10 +10,10 @@ export type ListEventByAcademicGroupParams = {
 
 export type ListEventByAcademicGroupResult = EventDTO[]
 
-export interface IListEventByAcademicGroupUseCase
+export interface IListEventByAcademicGroupUsecase
   extends IUsecase<ListEventByAcademicGroupParams, ListEventByAcademicGroupResult> {}
 
-export class ListAcademicGroupsByUserUsecase implements IListEventByAcademicGroupUseCase {
+export class ListEventByAcademicGroupUsecase implements IListEventByAcademicGroupUsecase {
   constructor(
     private readonly eventRepository: IEventRepository,
     private readonly academicGroupRepository: IAcademicGroupRepository
@@ -24,7 +24,7 @@ export class ListAcademicGroupsByUserUsecase implements IListEventByAcademicGrou
 
     if (!existingAcademicGroup) throw new EntityNotFound('academicGroup')
 
-    const events = await this.eventRepository.getByAcademicGroup(academicGroupId)
+    const events = await this.eventRepository.listByAcademicGroup(academicGroupId)
     return events
   }
 }

@@ -3,7 +3,7 @@ export interface LocationDTO {
   street: string
   number: string
   district: string
-  zipCode: number
+  zipCode: string
   complement: string
   referencePoint: string
 }

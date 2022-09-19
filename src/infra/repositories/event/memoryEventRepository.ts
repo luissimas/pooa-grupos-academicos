@@ -1,4 +1,3 @@
-import { Student } from '@domain/entities/student'
 import { Event, EventStatusEnum } from '@domain/entities/event'
 import { UserRoleEnum } from '@domain/entities/user'
 import { IEventRepository } from '@repositories/eventRepository'
@@ -10,7 +9,7 @@ export class MemoryEventRepository implements IEventRepository {
     {
       id: '21da4g51-a4be-41c2-9a49-48d1ba346a10',
       name: 'Secomp',
-      date: '2022-12-03',
+      date: new Date('2022-12-03'),
       status: EventStatusEnum.Future,
       location: {
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -46,7 +45,7 @@ export class MemoryEventRepository implements IEventRepository {
     {
       id: '6ahs8lg3-a4be-41c2-9a49-48d1ba346a10',
       name: 'Gamenight',
-      date: '2019-10-03',
+      date: new Date('2019-10-03'),
       status: EventStatusEnum.Canceled,
       location: {
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -82,7 +81,7 @@ export class MemoryEventRepository implements IEventRepository {
     {
       id: '5asdghel-a4be-41c2-9a49-48d1ba346a10',
       name: 'Workshop Integrativo',
-      date: '2022-09-17',
+      date: new Date('2022-09-17'),
       status: EventStatusEnum.Occuring,
       location: {
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -129,19 +128,11 @@ export class MemoryEventRepository implements IEventRepository {
     MemoryEventRepository.events = [...MemoryEventRepository.events, event]
   }
 
-  async list(): Promise<Event[]> {
-    return MemoryEventRepository.events
-  }
-
-  async getById(id: string): Promise<Event | undefined> {
-    return MemoryEventRepository.events.find(event => event.id === id)
-  }
-
-  async getByAcademicGroup(idAcademicGroup: string): Promise<Event[]> {
+  async listByAcademicGroup(idAcademicGroup: string): Promise<Event[]> {
     return MemoryEventRepository.events.filter(
       event =>
-        event.academicGroupsInvited.some(academicGroup => academicGroup.id === idAcademicGroup) ||
-        event.academicGroupsPromoters.some(academicGroup => academicGroup.id === idAcademicGroup)
+        event.academicGroupsInvited.some(academicGroup => academicGroup === idAcademicGroup) ||
+        event.academicGroupsPromoters.some(academicGroup => academicGroup === idAcademicGroup)
     )
   }
 
