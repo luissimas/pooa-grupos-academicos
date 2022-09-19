@@ -4,6 +4,7 @@ import { CreateAcademicGroupControllerFactory } from '@factories/controller/acad
 import { ListAcademicGroupByIdControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupByIdControllerFactory'
 import { DisableAcademicGroupControllerFactory } from '@factories/controller/academicGroup/disableAcademicGroupControllerFactory'
 import { ListAcademicGroupMembersControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupMembersControllerFactory'
+import { RemoveAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/RemoveAcademicGroupMemberControllerFactory'
 import { ListAcademicGroupsControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupsControllerFactory'
 import { UpdateAcademicGroupSponsorControllerFactory } from '@factories/controller/academicGroup/updateAcademicGroupSponsorControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
@@ -14,6 +15,7 @@ const authMiddleware = AuthMiddlewareFactory.createMiddleware()
 const createAcademicGroupController = CreateAcademicGroupControllerFactory.createController()
 const listAcademicGroupMembersController = ListAcademicGroupMembersControllerFactory.createController()
 const addAcademicGroupMemberController = AddAcademicGroupMemberControllerFactory.createController()
+const removeAcademicGroupMemberController = RemoveAcademicGroupMemberControllerFactory.createController()
 const listAcademicGroupsController = ListAcademicGroupsControllerFactory.createController()
 const listAcademicGroupByIdController = ListAcademicGroupByIdControllerFactory.createController()
 const disableAcademicGroupController = DisableAcademicGroupControllerFactory.createController()
@@ -236,6 +238,39 @@ router.get('/:academicGroupId', adaptController(listAcademicGroupByIdController)
  *        description: Erro interno no servidor
  */
 router.put('/:academicGroupId/disable', adaptController(disableAcademicGroupController))
+
+/**
+ * @swagger
+ * /academicGroup/:academicGroupId/member/:memberId/remove:
+ *   put:
+ *     summary: Remoção de membros.
+ *     description: Remove um membro de um grupo acadêmico cadastrado no sistema.
+ *     tags:
+ *       - Grupo acadêmico
+ *     parameters:
+ *       - name: academicGroupId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *       - name: memberId
+ *         in: path
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *     responses:
+ *      '204':
+ *        description: Membro removido com sucesso
+ *      '400':
+ *        description: Campos da requisição inválidos
+ *      '404':
+ *        description: Usuário ou grupo acadêmico não encontrado
+ *      '409':
+ *        description: Usuário não pode ser removido ao grupo acadêmico
+ *      '500':
+ *        description: Erro interno no servidor
+ */
+router.put('/:academicGroupId/member/:memberId/remove', adaptController(removeAcademicGroupMemberController))
 
 /**
  * @swagger
