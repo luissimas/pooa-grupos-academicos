@@ -10,7 +10,7 @@ import { IUsecase } from '..'
 
 export type CreateEventUsecaseParams = {
   name: string
-  date: Date
+  date: string
   promoters: string[]
   status: EventStatusEnum
   location: {
@@ -64,7 +64,7 @@ export class CreateEventUsecase implements ICreateEventUsecase {
 
     const event = new Event({
       id: idEvent,
-      date: params.date,
+      date: new Date(params.date),
       name: params.name,
       location: {
         ...params.location,
