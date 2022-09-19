@@ -40,7 +40,7 @@ export class CreateEventController implements IHttpController {
           .required(),
         speakers: Joi.array().items(Joi.string().required()).required(),
         groupsPromoting: Joi.array().items(Joi.string().uuid().required()).required(),
-        groupsInvited: Joi.array().items(Joi.string().uuid().required()).required(),
+        groupsInvited: Joi.array().items(Joi.string().uuid()).required(),
       })
       .validate(body)
   }
