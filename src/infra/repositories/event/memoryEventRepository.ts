@@ -12,8 +12,16 @@ export class MemoryEventRepository implements IEventRepository {
       name: 'Secomp',
       date: '2022-12-03',
       status: EventStatusEnum.Future,
-      location: 'Avenida São Carlos, São Carlos - SP',
-      academicGroupsPromoters: ['d5ebc700-a4be-41c2-9a49-48d1ba346a10','ea68898c-ea06-43ab-85db-463dbb05fbb4'],
+      location: {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        street: 'Avenida São Carlos',
+        number: '0000',
+        district: 'Centro',
+        zipCode: '13000000',
+        complement: 'Sala 42',
+        referencePoint: 'Escritório',
+      },
+      academicGroupsPromoters: ['d5ebc700-a4be-41c2-9a49-48d1ba346a10', 'ea68898c-ea06-43ab-85db-463dbb05fbb4'],
       academicGroupsInvited: [],
       speakers: ['Linus Torvalds', 'Robert Cecil Martin'],
       promoters: [
@@ -40,7 +48,15 @@ export class MemoryEventRepository implements IEventRepository {
       name: 'Gamenight',
       date: '2019-10-03',
       status: EventStatusEnum.Canceled,
-      location: 'Departamento de Computação, São Carlos - SP',
+      location: {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        street: 'Avenida São Carlos',
+        number: '0000',
+        district: 'Centro',
+        zipCode: '13000000',
+        complement: 'Sala 42',
+        referencePoint: 'Escritório',
+      },
       academicGroupsPromoters: ['25b982ce-3914-4a71-84e3-97e6308bfbc8'],
       academicGroupsInvited: ['d5ebc700-a4be-41c2-9a49-48d1ba346a10', 'ea68898c-ea06-43ab-85db-463dbb05fbb4'],
       speakers: ['Mark Zuckerbeg', 'Harvey Smith'],
@@ -68,7 +84,15 @@ export class MemoryEventRepository implements IEventRepository {
       name: 'Workshop Integrativo',
       date: '2022-09-17',
       status: EventStatusEnum.Occuring,
-      location: 'Departamento de Computação, São Carlos - SP',
+      location: {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        street: 'Avenida São Carlos',
+        number: '0000',
+        district: 'Centro',
+        zipCode: '13000000',
+        complement: 'Sala 42',
+        referencePoint: 'Escritório',
+      },
       academicGroupsInvited: ['d5ebc700-a4be-41c2-9a49-48d1ba346a10'],
       academicGroupsPromoters: ['ea68898c-ea06-43ab-85db-463dbb05fbb4'],
       speakers: ['Silvio Santos', 'Luciano Hulk'],
@@ -96,8 +120,7 @@ export class MemoryEventRepository implements IEventRepository {
   private constructor() {}
 
   public static getInstance(): MemoryEventRepository {
-    if (!MemoryEventRepository.instance)
-      MemoryEventRepository.instance = new MemoryEventRepository()
+    if (!MemoryEventRepository.instance) MemoryEventRepository.instance = new MemoryEventRepository()
 
     return MemoryEventRepository.instance
   }
@@ -116,7 +139,9 @@ export class MemoryEventRepository implements IEventRepository {
 
   async getByAcademicGroup(idAcademicGroup: string): Promise<Event[]> {
     return MemoryEventRepository.events.filter(
-      event => event.academicGroupsInvited.some(academicGroup => academicGroup.id === idAcademicGroup) || event.academicGroupsPromoters.some(academicGroup => academicGroup.id === idAcademicGroup)
+      event =>
+        event.academicGroupsInvited.some(academicGroup => academicGroup.id === idAcademicGroup) ||
+        event.academicGroupsPromoters.some(academicGroup => academicGroup.id === idAcademicGroup)
     )
   }
 
@@ -125,5 +150,4 @@ export class MemoryEventRepository implements IEventRepository {
 
     MemoryEventRepository.events[index] = event
   }
-
 }
