@@ -2,8 +2,7 @@ import { UserDTO } from '@application/dtos/user'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
 import { IUserRepository } from '@application/repositories/userRepository'
 import { AcademicGroupStatusEnum } from '@domain/entities/academicGroup'
-import { UserRoleEnum } from '@domain/entities/user'
-import { BusinessLogicError, EntityNotFound, UnauthorizedError } from '@domain/errors'
+import { BusinessLogicError, EntityNotFound, ForbiddenError } from '@domain/errors'
 import { IUsecase } from '..'
 
 export type RemoveAcademicGroupMemberParams = {
@@ -21,22 +20,22 @@ export class RemoveAcademicGroupMemberUsecase implements IRemoveAcademicGroupMem
   ) {}
 
   async execute({ user, memberId, academicGroupId }: RemoveAcademicGroupMemberParams): Promise<any> {
-    if (user.role !== UserRoleEnum.Professor)
-      throw new UnauthorizedError('Only a professor is able to remove someone from a group.')
+    const academicGroup = await this.academicGroupRepository.getById(academicGroupId)
+
+    if (!academicGroup) throw new EntityNotFound('group')
+
+    if (academicGroup.sponsor.id !== user.id)
+      throw new ForbiddenError('only the group sponsor can remove an member from the academic group')
+
+    if (academicGroup.status !== AcademicGroupStatusEnum.Active)
+      throw new BusinessLogicError('only active groups are subject to alterations')
 
     const member = await this.userRepository.getById(memberId)
 
     if (!member) throw new EntityNotFound('user')
 
-    const academicGroup = await this.academicGroupRepository.getById(academicGroupId)
-
-    if (!academicGroup) throw new EntityNotFound('group')
-
-    if (academicGroup.status !== AcademicGroupStatusEnum.Active)
-      throw new BusinessLogicError('Only active groups are subject to alterations.')
-
     if (!academicGroup.members.some(member => member.id === memberId))
-      throw new BusinessLogicError("Given user isn't a member from this group.")
+      throw new BusinessLogicError("fiven user isn't a member from this group")
 
     const newMembers = academicGroup.members.filter(member => member.id !== memberId)
 
