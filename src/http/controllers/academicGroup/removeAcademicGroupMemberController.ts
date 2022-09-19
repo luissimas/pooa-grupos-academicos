@@ -1,7 +1,4 @@
-import {
-  RemoveAcademicGroupMemberUsecase,
-  IRemoveAcademicGroupMemberUsecase,
-} from '@application/usecases/academicGroup/removeAcademicGroupMemberUsecase'
+import { IRemoveAcademicGroupMemberUsecase } from '@application/usecases/academicGroup/removeAcademicGroupMemberUsecase'
 import { InvalidFieldError, UnauthorizedError } from '@domain/errors'
 import { IHttpController, HttpRequest, HttpResponse } from '@http'
 import Joi from 'joi'

@@ -1,13 +1,10 @@
 import { UserDTO } from '@application/dtos/user'
 import { IAcademicGroupRepository } from '@application/repositories/academicGroupRepository'
 import { IUserRepository } from '@application/repositories/userRepository'
-import { AcademicGroup, AcademicGroupStatusEnum } from '@domain/entities/academicGroup'
+import { AcademicGroupStatusEnum } from '@domain/entities/academicGroup'
 import { UserRoleEnum } from '@domain/entities/user'
 import { BusinessLogicError, EntityNotFound, UnauthorizedError } from '@domain/errors'
-import { MemoryAcademicGroupRepository } from '@infra/repositories/academicGroup/memoryAcademicGroupRepository'
-import { runInThisContext } from 'vm'
 import { IUsecase } from '..'
-import { AddAcademicGroupMemberUsecase } from './addAcademicGroupMemberUsecase'
 
 export type RemoveAcademicGroupMemberParams = {
   user: UserDTO
