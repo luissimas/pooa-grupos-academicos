@@ -136,6 +136,10 @@ export class MemoryEventRepository implements IEventRepository {
     )
   }
 
+  async getById(eventId: string): Promise<Event | undefined> {
+    return MemoryEventRepository.events.find(event => event.id === eventId)
+  }
+
   async update(event: Event): Promise<void> {
     const index = MemoryEventRepository.events.findIndex(existingEvent => existingEvent.id === event.id)
 
