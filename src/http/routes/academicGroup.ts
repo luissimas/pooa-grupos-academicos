@@ -7,7 +7,7 @@ import { ListAcademicGroupMembersControllerFactory } from '@factories/controller
 import { ListAcademicGroupsControllerFactory } from '@factories/controller/academicGroup/listAcademicGroupsControllerFactory'
 import { RemoveAcademicGroupMemberControllerFactory } from '@factories/controller/academicGroup/RemoveAcademicGroupMemberControllerFactory'
 import { UpdateAcademicGroupSponsorControllerFactory } from '@factories/controller/academicGroup/updateAcademicGroupSponsorControllerFactory'
-import { ListEventByAcademicGroupControllerFactory } from '@factories/controller/event/ListEventByAcademicGroupControllerFactory'
+import { ListEventByAcademicGroupControllerFactory } from '@factories/controller/event/listEventByAcademicGroupControllerFactory'
 import { AuthMiddlewareFactory } from '@factories/middlewares/authMiddlewareFactory'
 import { adaptMiddleware } from '@http/adapters/expressMiddlewareAdapter'
 import { Router } from 'express'

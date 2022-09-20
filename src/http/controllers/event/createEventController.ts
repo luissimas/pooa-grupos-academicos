@@ -28,17 +28,19 @@ export class CreateEventController implements IHttpController {
         date: Joi.string().isoDate().required(),
         promoters: Joi.array().items(Joi.string().uuid().required()).required(),
         status: Joi.string().pattern(/^future$|^occuring$|^canceled$/),
-        location: Joi.object().keys({
-          street: Joi.string().required(),
-          number: Joi.string().required(),
-          district: Joi.string().required(),
-          zipCode: Joi.string().required(),
-          complement: Joi.string().required(),
-          referencePoint: Joi.string().required(),
-        }),
+        location: Joi.object()
+          .keys({
+            street: Joi.string().required(),
+            number: Joi.string().required(),
+            district: Joi.string().required(),
+            zipCode: Joi.string().required(),
+            complement: Joi.string().required(),
+            referencePoint: Joi.string().required(),
+          })
+          .required(),
         speakers: Joi.array().items(Joi.string().required()).required(),
         groupsPromoting: Joi.array().items(Joi.string().uuid().required()).required(),
-        groupsInvited: Joi.array().items(Joi.string().uuid().required()).required(),
+        groupsInvited: Joi.array().items(Joi.string().uuid()).required(),
       })
       .validate(body)
   }
