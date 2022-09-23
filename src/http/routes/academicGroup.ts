@@ -196,6 +196,11 @@ router.put('/:academicGroupId/member/new', adaptController(addAcademicGroupMembe
  *     description: Lista todos os grupos acadêmicos cadastrados.
  *     tags:
  *       - Grupo acadêmico
+ *     parameters:
+ *       - name: name
+ *         in: query
+ *         schema:
+ *           type: string
  *     responses:
  *      '200':
  *        description: Grupos acadêmicos listados com sucesso

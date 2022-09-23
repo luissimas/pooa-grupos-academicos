@@ -437,7 +437,12 @@ export class MemoryAcademicGroupRepository implements IAcademicGroupRepository {
     MemoryAcademicGroupRepository.academicGroups = [...MemoryAcademicGroupRepository.academicGroups, academicGroup]
   }
 
-  async list(): Promise<AcademicGroup[]> {
+  async list(name?: string): Promise<AcademicGroup[]> {
+    if (name)
+      return MemoryAcademicGroupRepository.academicGroups.filter(group =>
+        group.name.toLowerCase().includes(name.toLowerCase())
+      )
+
     return MemoryAcademicGroupRepository.academicGroups
   }
 
